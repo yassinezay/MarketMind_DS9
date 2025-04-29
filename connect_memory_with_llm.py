@@ -1,23 +1,51 @@
 import os
 import requests
-from langchain.chains import RetrievalQA
+from dotenv import load_dotenv
+from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import PromptTemplate
+from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import Ollama
+from langchain_community.tools.ddg_search import DuckDuckGoSearchRun
 
-# --- Setup Embedding
+# ✅ Updated imports for HuggingFace and Ollama
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_ollama import OllamaLLM
+import re
+from bark_audio_generator import generate_audio, save_audio_to_wav
+
+# --- Load environment variables
+load_dotenv()
+
+# --- Embedding model
 embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-# --- Load FAISS Vector Store
+# --- FAISS Vector Store
 DB_FAISS_PATH = "vectorstore/db_faiss"
-db = FAISS.load_local(DB_FAISS_PATH, embedding_model, allow_dangerous_deserialization=True)
+faiss_db = FAISS.load_local(DB_FAISS_PATH, embedding_model, allow_dangerous_deserialization=True)
+faiss_retriever = faiss_db.as_retriever(search_kwargs={'k': 3})
 
-# --- Setup Mistral LLM via Ollama
+# --- Web fallback (DuckDuckGo)
+duckduckgo_tool = DuckDuckGoSearchRun()
+
+def web_fallback_retriever(query: str):
+    results = duckduckgo_tool.run(query)
+    return [Document(page_content=results)]
+
+# --- Hybrid retriever using new retriever method
+def hybrid_retriever(query: str):
+    local_docs = faiss_retriever.invoke(query)
+    combined_text = " ".join([doc.page_content for doc in local_docs])
+    if not local_docs or len(combined_text) < 300:
+        print("🔍 Local docs insufficient. Falling back to web (DuckDuckGo)...")
+        web_docs = web_fallback_retriever(query)
+        return local_docs + web_docs
+    return local_docs
+
+# --- Load Mistral via Ollama
 def load_llm():
-    return Ollama(model="mistral:7b-instruct")  # ✅ Corrected model name
+    return OllamaLLM(model="mistral:7b-instruct")
 
-# --- Prompt Template for Summarizing Company Profile
+# --- RAG prompt
 RAG_PROMPT_TEMPLATE = """
 You are a helpful assistant. Based on the documents below, extract key insights about the company’s identity, mission, and product quality.
 
@@ -33,23 +61,23 @@ def get_rag_prompt():
         input_variables=["context", "question"]
     )
 
-# --- Setup Retrieval QA Chain
-qa_chain = RetrievalQA.from_chain_type(
+qa_chain = create_stuff_documents_chain(
     llm=load_llm(),
-    chain_type="stuff",
-    retriever=db.as_retriever(search_kwargs={'k': 3}),
-    return_source_documents=False,
-    chain_type_kwargs={'prompt': get_rag_prompt()}
+    prompt=get_rag_prompt()
 )
 
-# --- Terminal Input
+def run_hybrid_rag(query):
+    docs = hybrid_retriever(query)
+    return qa_chain.invoke({"context": docs, "question": query})
+
+# --- Input
 user_query = input("💡 Enter your product idea: ")
 motif = input("🎨 Enter the desired motif/emotion (e.g., Excitement, Elegance, Trust): ")
 
-# --- Step 1: Extract Company Context
-rag_context = qa_chain.invoke({'query': 'Summarize the company profile.'})["result"]
+# --- Step 1: Get company summary
+rag_context = run_hybrid_rag("Summarize the company profile.")
 
-# --- Step 2: Create Prompt for Mistral Model (via Ollama)
+# --- Step 2: Format ad generation prompt
 MISTRAL_PROMPT_TEMPLATE = """
 🎯 You are a top-tier creative copywriter, specializing in writing engaging and persuasive product ads.
 
@@ -89,15 +117,32 @@ full_prompt = MISTRAL_PROMPT_TEMPLATE.format(
     motif=motif
 )
 
-# --- Step 3: Call Mistral via Ollama (Local model)
+# --- Step 3: Send to LLaMA 3 (Ollama endpoint)
 response = requests.post(
     "http://localhost:11434/api/generate",
-    json={"model": "mistral:7b-instruct", "prompt": full_prompt, "stream": False}  # ✅ Corrected model name
+    json={"model": "llama3.1:8b", "prompt": full_prompt, "stream": False}
 )
 
-# --- Step 4: Show Result
-result = response.json()
-generated_ad = result.get("response", "").strip()
+generated_ad = response.json().get("response", "").strip()
 
 print("\n📝 Generated Ad:\n")
-print(generated_ad)
+if generated_ad:
+    print(generated_ad)
+else:
+    print("⚠️ No content generated. Please check the prompt or if the model is active.")
+
+def extract_headline(ad_text):
+    """Extracts the headline following the '**Headline:**' label."""
+    match = re.search(r"\*\*Headline:\*\*\s*(.+)", ad_text)
+    if match:
+        # Optionally clean up markdown or emojis if needed
+        return match.group(1).strip()
+    return None
+
+headline = extract_headline(generated_ad)
+if headline:
+    print(f"\n🗣️ Generating audio for headline: \"{headline}\"\n")
+    audio_array, sample_rate = generate_audio(headline)
+    save_audio_to_wav(audio_array, sample_rate, filename="ad_headline_audio.wav")
+else:
+    print("⚠️ No headline found to generate audio.")
