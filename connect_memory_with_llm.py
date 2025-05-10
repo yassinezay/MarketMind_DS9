@@ -41,6 +41,10 @@ def hybrid_retriever(query: str):
         return local_docs + web_docs
     return local_docs
 
+dialect_embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+dialect_db = FAISS.load_local("vectorstore/dialect_faiss", dialect_embedding_model, allow_dangerous_deserialization=True)
+dialect_retriever = dialect_db.as_retriever(search_kwargs={'k': 5})
+
 # --- Load Mistral via Ollama
 def load_llm():
     return OllamaLLM(model="mistral:7b-instruct")
@@ -73,45 +77,97 @@ def run_hybrid_rag(query):
 # --- Input
 user_query = input("💡 Enter your product idea: ")
 motif = input("🎨 Enter the desired motif/emotion (e.g., Excitement, Elegance, Trust): ")
+language = input("🌍 Choose ad language (English or French): ").strip().lower()
 
 # --- Step 1: Get company summary
 rag_context = run_hybrid_rag("Summarize the company profile.")
+# --- Récupération des expressions en dialecte tunisien
+tunisian_context_docs = dialect_retriever.invoke(user_query)
+tunisian_sentences = [doc.page_content for doc in tunisian_context_docs]
+
 
 # --- Step 2: Format ad generation prompt
-MISTRAL_PROMPT_TEMPLATE = """
-🎯 You are a top-tier creative copywriter, specializing in writing engaging and persuasive product ads.
+MISTRAL_PROMPT_EN = """
+🚀 You are a world-class creative copywriter trusted by top global brands to craft unforgettable, high-converting product advertisements.
 
-Your mission is to **generate a captivating product ad** using the given information below.
-Be creative, highlight unique selling points, and make it emotionally appealing to the audience. 🌟
+Your job is to write a magnetic product ad that emotionally connects with the audience, showcases the product's unique value, and cleverly integrates the Tunisian cultural flair using the provided expressions. 🎯
 
 ---
 
-🏢 Company Context:
+💬 Use at least one of the following authentic Tunisian expressions in each sentence to make it vibrant and locally resonant:
+{tunisian_phrases}
+
+🏢 **Company Essence:**
 {context}
 
-🛍️ Product Description:
+🛍️ **Product Description (Idea):**
 {question}
 
-🎨 Motif (Tone/Emotion to Use):
+🎨 **Creative Motif / Emotion to Embody:**
 {motif}
 
 ---
 
-✨ Rules:
-- Start with a catchy headline
-- Highlight key features naturally
-- Make it feel persuasive but NOT robotic
-- Use the motif/emotion strongly
-- Keep it concise (max 120 words)
-- Sprinkle emojis naturally
-- Avoid any unrelated content
+🛠️ **Creative Rules:**
+- Start with a **bold, catchy headline** that grabs attention immediately
+- Use storytelling to evoke **emotion** and build desire
+- Blend **benefits** and **feelings**, not just features
+- Use **modern, informal tone** that feels human — not robotic
+- Inject **natural emojis** that enhance, not distract
+- Stay under **120 words**
+- Finish with **3–5 punchy hashtags** (e.g., #AuthenticVibes, #TunisianPride)
+- Absolutely avoid repetition, clichés, or boring wording
 
 ---
 
-Now, generate the product ad below:
+✍️ Now, craft a powerful ad below. Make it scroll-stopping, fun, and unforgettable:
 """
 
-full_prompt = MISTRAL_PROMPT_TEMPLATE.format(
+MISTRAL_PROMPT_FR = """
+🚀 Tu es un·e copywriter créatif·ve de renommée mondiale, choisi·e par les plus grandes marques pour créer des publicités produits inoubliables et ultra-convertissantes.
+
+Ta mission : rédiger une publicité percutante qui touche le cœur du public, valorise l’unicité du produit, et intègre avec créativité des expressions tunisiennes authentiques. 🎯
+
+---
+
+💬 Utilise au moins une des expressions tunisiennes suivantes dans chaque phrase pour donner du caractère et une touche locale :
+{tunisian_phrases}
+
+🏢 **Essence de l'entreprise :**
+{context}
+
+🛍️ **Description du produit :**
+{question}
+
+🎨 **Motif / Émotion à transmettre :**
+{motif}
+
+---
+
+🛠️ **Consignes créatives :**
+- Commence par un **titre accrocheur** et impactant
+- Raconte une histoire qui suscite **l’émotion** et donne envie
+- Mets en valeur les **bénéfices**, pas seulement les caractéristiques
+- Utilise un **ton naturel et moderne** – pas de robot !
+- Intègre des **emojis pertinents** de manière fluide
+- Ne dépasse pas **120 mots**
+- Termine par **3 à 5 hashtags puissants** (ex. : #FiertéTunisienne, #StyleMaghreb)
+- Évite absolument la redondance, les clichés ou les tournures fades
+
+---
+
+✍️ Maintenant, écris une pub puissante. Elle doit captiver, faire sourire et marquer les esprits :
+"""
+
+
+
+if language == "french":
+    selected_prompt = MISTRAL_PROMPT_FR
+else:
+    selected_prompt = MISTRAL_PROMPT_EN
+
+full_prompt = selected_prompt.format(
+    tunisian_phrases="\n".join(tunisian_sentences),
     context=rag_context,
     question=user_query,
     motif=motif
