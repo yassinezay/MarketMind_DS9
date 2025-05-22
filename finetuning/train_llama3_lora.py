@@ -21,7 +21,7 @@ from transformers import (
 from peft import LoraConfig, get_peft_model
 
 # --- Step 3: Set Hugging Face Token
-os.environ["HF_TOKEN"] = "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"  # <-- Secure your key normally!
+os.environ["HF_TOKEN"] = "api-token_here"  # <-- Secure your key normally!
 
 # --- Step 4: Load and Prepare Dataset
 csv_path = "/content/drive/MyDrive/products_100_combined.csv"

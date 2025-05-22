@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MarketMind - AI Audio Generator</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts (pas besoin de changer) -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap core CSS (via dossier static) -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <!-- Additional CSS Files (via dossier static) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-space-dynamic.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animated.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}" />
+
+    <!-- TemplateMo 562 Space Dynamic -->
+    <link rel="stylesheet" href="https://templatemo.com/tm-562-space-dynamic" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <!-- Custom CSS -->
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #f72585;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        --gradient-accent: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        --transition-speed: 0.4s;
+        --border-radius: 16px;
+      }
+      
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8fafc;
+        color: var(--dark-color);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+        background-image: 
+          radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.08) 0%, transparent 25%),
+          radial-gradient(circle at 90% 80%, rgba(247, 37, 133, 0.08) 0%, transparent 25%);
+        animation: gradientShift 20s ease infinite;
+        background-size: 200% 200%;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }
+        100% { background-position: 0% 0%; }
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 1024px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      .container {
+        padding: 2.5rem;
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: var(--border-radius);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transform: translateY(0);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+        height: fit-content;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      }
+      
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+        padding-top: 1rem;
+        grid-column: 1 / -1;
+      }
+
+      .header::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--gradient-accent);
+        margin: 1.5rem auto;
+        border-radius: 2px;
+        animation: scaleIn 0.8s ease-out;
+      }
+      
+      .header h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+        position: relative;
+        animation: fadeInDown 0.8s ease-out;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        color: #64748b;
+        max-width: 600px;
+        margin: 0 auto;
+        animation: fadeIn 1s ease-out 0.2s both;
+      }
+      
+      /* Form Section */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        animation: fadeInUp 0.8s ease-out 0.3s both;
+      }
+
+      .form-group {
+        position: relative;
+      }
+
+      label {
+        font-weight: 600;
+        color: #334155;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: all var(--transition-speed) ease;
+      }
+
+      .form-group:hover label {
+        color: var(--primary-color);
+        transform: translateX(3px);
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 150px;
+        padding: 1rem 1.2rem;
+        border: 1px solid #e2e8f0;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        background-color: #f8fafc;
+        transition: all var(--transition-speed) ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        resize: vertical;
+      }
+
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        transform: translateY(-2px);
+      }
+
+      /* Voice Selection */
+      .voice-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .voice-option {
+        position: relative;
+      }
+
+      .voice-option input {
+        position: absolute;
+        opacity: 0;
+      }
+
+      .voice-option label {
+        display: block;
+        padding: 1rem;
+        background: #f8fafc;
+        border-radius: var(--border-radius);
+        text-align: center;
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        border: 1px solid #e2e8f0;
+      }
+
+      .voice-option input:checked + label {
+        background: var(--gradient);
+        color: white;
+        border-color: var(--primary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+      }
+
+      .voice-option label:hover {
+        border-color: var(--primary-color);
+      }
+
+      .voice-option i {
+        display: block;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        background: var(--gradient);
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      button[type="submit"]:hover {
+        background: var(--gradient-accent);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+      }
+
+      button[type="submit"]:active {
+        transform: translateY(1px);
+      }
+
+      button[type="submit"]::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255, 255, 255, 0.3),
+          rgba(255, 255, 255, 0.1)
+        );
+        transform: rotate(30deg);
+        transition: all 0.6s ease;
+      }
+
+      button[type="submit"]:hover::after {
+        left: 100%;
+      }
+
+      /* Loading Bar */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .loading-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .loading-container {
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .loading-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .loading-bar {
+        height: 8px;
+        width: 100%;
+        background: #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+
+      .loading-progress {
+        height: 100%;
+        width: 0;
+        border-radius: 10px;
+        background: var(--gradient-accent);
+        position: relative;
+        transition: width 0.3s ease;
+      }
+
+      .loading-progress::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      .loading-dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+        gap: 0.5rem;
+      }
+
+      .loading-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        opacity: 0.3;
+        animation: pulse 1.5s infinite ease-in-out;
+      }
+
+      .loading-dot:nth-child(1) { animation-delay: 0s; }
+      .loading-dot:nth-child(2) { animation-delay: 0.3s; }
+      .loading-dot:nth-child(3) { animation-delay: 0.6s; }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.3); opacity: 1; }
+      }
+
+      .loading-percentage {
+        margin-top: 1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+      }
+
+      /* Result Display */
+      .result-container {
+        background: linear-gradient(to bottom right, #f1f5f9, #ffffff);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: 
+          inset 0 1px 3px rgba(0,0,0,0.05),
+          0 5px 15px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.05);
+        animation: fadeIn 0.8s ease-out;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .result-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .result-container h4 {
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        margin: 0;
+      }
+
+      .result-container h4 i {
+        margin-right: 0.5rem;
+        color: var(--accent-color);
+      }
+
+      .download-btn {
+        background: var(--gradient);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all var(--transition-speed) ease;
+        box-shadow: 0 2px 10px rgba(67, 97, 238, 0.2);
+        text-decoration: none;
+      }
+
+      .download-btn:hover {
+        background: var(--gradient-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      .download-btn:active {
+        transform: translateY(0);
+      }
+
+      .download-btn i {
+        font-size: 0.9rem;
+      }
+
+      .result-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      /* Audio Player Customization */
+      .audio-player-container {
+        width: 100%;
+        max-width: 500px;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .audio-player-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(67, 97, 238, 0.1), transparent);
+        z-index: 0;
+      }
+
+      .audio-visualizer {
+        height: 100px;
+        width: 100%;
+        margin-bottom: 1.5rem;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+
+      .audio-bar {
+        width: 8px;
+        background: var(--gradient);
+        border-radius: 4px;
+        animation: equalize 1.5s infinite ease-in-out;
+        animation-delay: calc(var(--order) * 0.1s);
+      }
+
+      @keyframes equalize {
+        0%, 100% { height: 10%; }
+        50% { height: 90%; }
+      }
+
+      audio {
+        width: 100%;
+        border-radius: var(--border-radius);
+      }
+
+      /* Custom audio controls */
+      audio::-webkit-media-controls-panel {
+        background: var(--gradient);
+        border-radius: var(--border-radius);
+      }
+
+      audio::-webkit-media-controls-play-button,
+      audio::-webkit-media-controls-mute-button {
+        filter: brightness(0) invert(1);
+      }
+
+      audio::-webkit-media-controls-current-time-display,
+      audio::-webkit-media-controls-time-remaining-display {
+        color: white;
+      }
+
+      /* Audio Wave Animation */
+      .wave-container {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+
+      .wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%234361ee" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%234361ee" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%234361ee"/></svg>');
+        background-repeat: repeat-x;
+        background-position: 0 bottom;
+        background-size: 50% 100px;
+        animation: wave 15s linear infinite;
+      }
+
+      @keyframes wave {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      /* Success notification */
+      .notification {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--gradient);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 1000;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+
+      .notification.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* Error Message */
+      .error-message {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        color: #dc2626;
+        font-size: 0.95rem;
+        text-align: center;
+        background: rgba(220, 38, 38, 0.1);
+        border-radius: var(--border-radius);
+        border-left: 4px solid #dc2626;
+        animation: shake 0.5s ease-in-out;
+      }
+
+      /* Floating animation for decorative elements */
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+      }
+
+      @keyframes scaleIn {
+        0% { transform: scaleX(0); opacity: 0; }
+        100% { transform: scaleX(1); opacity: 1; }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+        }
+        
+        .header h1 {
+          font-size: 2.2rem;
+        }
+
+        .voice-options {
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        }
+      }
+
+      @media (max-width: 576px) {
+        body {
+          padding: 1rem;
+        }
+        
+        .header h1 {
+          font-size: 1.8rem;
+        }
+        
+        .header p {
+          font-size: 1rem;
+        }
+
+        .voice-options {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+
+ <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <h4>Nova<span>souk</span></h4>
+              </a>
+              <!-- ***** Logo End ***** -->
+
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="index" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="index">About Us</a></li>
+                <li class="scroll-to-section"><a href="index">Portfolio</a></li>
+                <li class="scroll-to-section"><a href="index">Message Us</a></li>
+                <li class="scroll-to-section">
+                  <div class="main-red-button">
+                    <a href="index">Contact Now</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+<br><br><br><br><br><br>
+  <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loading-container">
+        <div class="loading-title">MarketMind AI is generating your audio</div>
+        <div class="loading-bar">
+          <div class="loading-progress" id="loading-progress"></div>
+        </div>
+        <div class="loading-percentage" id="loading-percentage">0%</div>
+        <div class="loading-dots">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <!-- Header -->
+      <header class="header animate__animated animate__fadeIn">
+        <h1>MarketMind AI</h1>
+        <p>Transform text into natural-sounding audio with AI-powered voice generation</p>
+      </header>
+
+      <!-- Form Column -->
+      <div class="container animate__animated animate__fadeInLeft">
+        <form id="generation-form" action="/audio_generation" method="POST" novalidate>
+          <div class="form-group">
+            <label for="text"><i class="fas fa-align-left"></i> Text to Convert:</label>
+            <textarea
+              name="text"
+              id="text"
+              placeholder="Enter the text you want to convert to speech..."
+              required
+            >{% if text %}{{ text }}{% endif %}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> Voice Style:</label>
+            <div class="voice-options">
+              <div class="voice-option">
+                <input type="radio" id="voice1" name="voice" value="male" checked>
+                <label for="voice1"><i class="fas fa-male"></i> Male </label>
+              </div>
+              
+              <div class="voice-option">
+                <input type="radio" id="voice3" name="voice" value="female">
+                <label for="voice3"><i class="fas fa-female"></i> Female </label>
+              </div>
+            </div>
+          </div>
+
+
+          <button type="submit" class="animate__animated animate__pulse animate__infinite animate__slower">
+            <i class="fas fa-wave-square"></i> Generate Audio
+          </button>
+        </form>
+
+        {% if error_message %}
+        <div class="error-message animate__animated animate__shakeX">
+          <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Results Column -->
+      <div class="container animate__animated animate__fadeInRight">
+        {% if audio_filename %}
+        <div class="result-container">
+          <div class="result-header">
+            <h4><i class="fas fa-volume-up"></i> Generated Audio</h4>
+            <a href="{{ url_for('serve_audio', filename=audio_filename) }}" download class="download-btn">
+              <i class="fas fa-download"></i> Download
+            </a>
+          </div>
+          
+          <div class="result-content">
+            <div class="wave-container">
+              <div class="wave"></div>
+            </div>
+            
+            <div class="audio-player-container">
+              <div class="audio-visualizer">
+                {% for i in range(20) %}
+                <div class="audio-bar" style="--order: {{ i }}"></div>
+                {% endfor %}
+              </div>
+              <audio controls autoplay>
+                <source src="{{ url_for('serve_audio', filename=audio_filename) }}" type="audio/wav">
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="result-container" style="display: flex; align-items: center; justify-content: center;">
+          <div style="text-align: center; padding: 2rem;">
+            <i class="fas fa-volume-up" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem;"></i>
+            <h3 style="color: #64748b;">Your generated audio will appear here</h3>
+            <p style="color: #94a3b8;">Enter your text, select a voice style, and click "Generate Audio"</p>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+      <i class="fas fa-check-circle"></i>
+      <span id="notification-message">Action completed successfully!</span>
+    </div>
+
+    <script>
+      // Add animation to form elements on focus
+      document.querySelectorAll('textarea').forEach(element => {
+        element.addEventListener('focus', () => {
+          element.style.transform = 'translateY(-2px)';
+          element.style.boxShadow = '0 5px 15px rgba(67, 97, 238, 0.1)';
+        });
+        
+        element.addEventListener('blur', () => {
+          element.style.transform = '';
+          element.style.boxShadow = '';
+        });
+      });
+
+      // Add pulse animation to button when form is valid
+      const form = document.getElementById('generation-form');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const loadingOverlay = document.getElementById('loading-overlay');
+      const loadingProgress = document.getElementById('loading-progress');
+      const loadingPercentage = document.getElementById('loading-percentage');
+      
+      form.addEventListener('input', () => {
+        if(form.checkValidity()) {
+          submitBtn.classList.add('animate__pulse');
+        } else {
+          submitBtn.classList.remove('animate__pulse');
+        }
+      });
+
+      // Form submission with improved loading animation
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Show loading overlay
+        loadingOverlay.classList.add('active');
+        let progress = 0;
+        
+        // Initial fast progress (0-50%)
+        const initialInterval = setInterval(() => {
+          progress += Math.random() * 5;
+          if (progress >= 50) {
+            clearInterval(initialInterval);
+            startSlowerProgress();
+          }
+          updateProgress(progress);
+        }, 150);
+
+        function startSlowerProgress() {
+          // Slower progress (50-85%)
+          const middleInterval = setInterval(() => {
+            progress += Math.random() * 2;
+            if (progress >= 85) {
+              clearInterval(middleInterval);
+              startFinalProgress();
+            }
+            updateProgress(progress);
+          }, 300);
+        }
+
+        function startFinalProgress() {
+          // Very slow progress (85-100%) - waits for actual completion
+          const finalInterval = setInterval(() => {
+            progress += Math.random();
+            if (progress >= 100) {
+              progress = 100;
+              clearInterval(finalInterval);
+            }
+            updateProgress(progress);
+          }, 500);
+        }
+
+        function updateProgress(value) {
+          loadingProgress.style.width = `${value}%`;
+          loadingPercentage.textContent = `${Math.round(value)}%`;
+        }
+
+        try {
+          // Create FormData object
+          const formData = new FormData(form);
+          
+          // Send the actual request
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+          });
+          
+          // When we get the response, complete the progress
+          if (response.ok) {
+            updateProgress(100);
+            setTimeout(() => {
+              // Submit the form normally to show results
+              form.submit();
+            }, 500);
+          } else {
+            handleError();
+          }
+        } catch (error) {
+          handleError();
+        }
+
+        function handleError() {
+          loadingOverlay.classList.remove('active');
+          // Show error message or handle as needed
+          showNotification('An error occurred. Please try again.', 'error');
+        }
+      });
+
+      // Show notification function
+      function showNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notification-message');
+        
+        notificationMessage.textContent = message;
+        
+        // Change color based on type
+        if (type === 'error') {
+          notification.style.background = 'linear-gradient(135deg, #dc2626, #b91c1c)';
+        } else {
+          notification.style.background = 'var(--gradient)';
+        }
+        
+        notification.classList.add('show');
+        
+        // Hide after 3 seconds
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+
+      // Audio visualizer animation when audio is playing
+      document.addEventListener('DOMContentLoaded', () => {
+        const audioElement = document.querySelector('audio');
+        if (audioElement) {
+          const audioBars = document.querySelectorAll('.audio-bar');
+          
+          audioElement.addEventListener('play', () => {
+            audioBars.forEach(bar => {
+              bar.style.animation = 'equalize 1.5s infinite ease-in-out';
+            });
+          });
+          
+          audioElement.addEventListener('pause', () => {
+            audioBars.forEach(bar => {
+              bar.style.animation = 'none';
+              bar.style.height = '10%';
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

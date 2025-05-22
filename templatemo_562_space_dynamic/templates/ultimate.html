@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Plan Features</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap core CSS (via dossier static) -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+  <!-- Additional CSS Files (via dossier static) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-space-dynamic.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animated.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}" />
+
+  <style>
+    /* Global Styles */
+    :root {
+      --primary-color: #3a0ca3;
+      --secondary-color: #f0e6ff;
+      --accent-color: #4361ee;
+      --text-color: #333;
+      --light-text: #6c757d;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Ultimate Header Section */
+    .ultimate-header {
+      background: linear-gradient(135deg, #f0e6ff, #d9c7ff);
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .ultimate-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.3)"/></svg>');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      opacity: 0.7;
+    }
+    
+    .ultimate-header h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      position: relative;
+      color: var(--primary-color);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .ultimate-header p {
+      font-size: 1.3rem;
+      color: var(--light-text);
+      max-width: 700px;
+      margin: 0 auto 30px;
+      position: relative;
+    }
+    
+    .ultimate-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #3a0ca3, #7209b7);
+      color: white;
+      padding: 10px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 20px rgba(58, 12, 163, 0.3);
+      position: relative;
+      animation: pulse 2s infinite;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Features Grid */
+    .features-grid {
+      padding: 100px 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="rgba(58,12,163,0.05)" stroke-width="2"><circle cx="25" cy="25" r="1"/><circle cx="50" cy="50" r="1"/><circle cx="75" cy="75" r="1"/></svg>');
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      display: inline-block;
+      position: relative;
+    }
+    
+    .section-title h2::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .col-lg-3.col-sm-6 {
+      flex: 0 0 calc(50% - 30px);
+      max-width: calc(50% - 30px);
+    }
+    
+    @media (min-width: 992px) {
+      .col-lg-3.col-sm-6 {
+        flex: 0 0 calc(25% - 30px);
+        max-width: calc(25% - 30px);
+      }
+    }
+    
+    .item {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      height: 350px;
+      position: relative;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    
+    .ultimate-item {
+      border-top: 4px solid var(--primary-color);
+    }
+    
+    .item:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      border-color: var(--primary-color);
+    }
+    
+    .showed-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .showed-content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(240,230,255,0.8), rgba(255,255,255,0.9));
+      z-index: -1;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    
+    .item:hover .showed-content::before {
+      opacity: 1;
+    }
+    
+    .showed-content img {
+      max-width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+      transition: all 0.4s ease;
+      margin-bottom: 30px;
+    }
+    
+    .item:hover .showed-content img {
+      transform: scale(1.15) rotate(5deg);
+    }
+    
+    .showed-content h3 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+    
+    .item:hover .showed-content h3 {
+      transform: translateY(-10px);
+    }
+    
+    .hidden-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to bottom, transparent, var(--primary-color));
+      color: white;
+      padding: 30px;
+      transform: translateY(100%);
+      transition: all 0.4s ease;
+      opacity: 0;
+      border-radius: 0 0 13px 13px;
+    }
+    
+    .item:hover .hidden-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .hidden-content p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+    }
+    
+    .feature-badge {
+      display: inline-block;
+      background-color: white;
+      color: var(--primary-color);
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+    
+    /* Ultimate Benefits Section */
+    .ultimate-benefits {
+      background-color: white;
+      padding: 80px 0;
+      position: relative;
+    }
+    
+    .benefits-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    
+    .benefit-card {
+      flex: 0 0 calc(33.333% - 30px);
+      background: var(--secondary-color);
+      border-radius: 15px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(58,12,163,0.1);
+    }
+    
+    .benefit-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(58,12,163,0.1);
+      border-color: rgba(58,12,163,0.3);
+    }
+    
+    .benefit-card i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      transition: all 0.4s ease;
+    }
+    
+    .benefit-card:hover i {
+      transform: rotate(15deg) scale(1.2);
+    }
+    
+    .benefit-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+    
+    .benefit-card p {
+      color: var(--light-text);
+      font-size: 1rem;
+    }
+    
+    .benefit-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), #9d4edd);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    
+    .benefit-card:hover::after {
+      transform: scaleX(1);
+    }
+    
+    /* Testimonials Section */
+    .testimonials {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 80px 0;
+    }
+    
+    .testimonial-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin: 15px;
+      position: relative;
+    }
+    
+    .testimonial-card::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 5rem;
+      color: rgba(58,12,163,0.1);
+      font-family: serif;
+      line-height: 1;
+    }
+    
+    .testimonial-content {
+      position: relative;
+      z-index: 1;
+      font-style: italic;
+      color: var(--light-text);
+      margin-bottom: 20px;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+    
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+      border: 2px solid var(--primary-color);
+    }
+    
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .author-info h4 {
+      color: var(--text-color);
+      margin-bottom: 5px;
+    }
+    
+    .author-info p {
+      color: var(--primary-color);
+      font-size: 0.9rem;
+    }
+    
+    /* Upgrade CTA Section */
+    .enterprise-cta {
+      background: linear-gradient(135deg, var(--primary-color), #480ca8);
+      padding: 100px 0;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .enterprise-cta::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    
+    .enterprise-cta::after {
+      content: "";
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 250px;
+      height: 250px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    
+    .enterprise-cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .enterprise-cta p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+    }
+    
+    .enterprise-button {
+      display: inline-block;
+      background: white;
+      color: var(--primary-color);
+      padding: 18px 45px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+    
+    .enterprise-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: 0.5s;
+    }
+    
+    .enterprise-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+    
+    .enterprise-button:hover::before {
+      left: 100%;
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .floating {
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .wow {
+      visibility: hidden;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .benefit-card {
+        flex: 0 0 calc(50% - 30px);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .col-lg-3.col-sm-6,
+      .benefit-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      
+      .ultimate-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .ultimate-header p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              <h4>Nova<span>souk</span></h4>
+            </a>
+            <!-- ***** Logo End ***** -->
+
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="index" class="active">Home</a></li>
+              <li class="scroll-to-section"><a href="index">About Us</a></li>
+              <li class="scroll-to-section"><a href="index">Portfolio</a></li>
+              <li class="scroll-to-section"><a href="index">Message Us</a></li>
+              <li class="scroll-to-section">
+                <div class="main-red-button">
+                  <a href="index">Contact Now</a>
+                </div>
+              </li>
+            </ul>
+            <a class="menu-trigger">
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <br><br><br><br>
+
+  <!-- Ultimate Header Section -->
+  <section class="ultimate-header">
+    <div class="container">
+      <span class="ultimate-badge animate__animated animate__pulse animate__infinite">Ultimate Plan</span>
+      <h1 class="animate__animated animate__fadeInDown">Unlock Enterprise-Grade Features</h1>
+      <p class="animate__animated animate__fadeInUp">Experience the full power of our platform with ultimate tools designed for professional content creation and analytics.</p>
+    </div>
+  </section>
+
+  <!-- Features Grid Section -->
+  <section class="features-grid">
+    <div class="container">
+      <div class="section-title wow fadeIn">
+        <h2>Ultimate Features</h2>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-3 col-sm-6">
+          <a href="{{ url_for('text_generation_with_engagement') }}">
+            <div class="item ultimate-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+              <div class="showed-content">
+                <img src="{{ url_for('static', filename='assets/images/2921747.png') }}" alt="Advanced Text Generation" class="floating" />
+                <h3>Advanced Text Gen</h3>
+              </div>
+              <div class="hidden-content">
+                <p>Generate high-quality, SEO-optimized content with enhanced AI capabilities and unlimited outputs</p>
+                <span class="feature-badge">Ultimate Exclusive</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="col-lg-3 col-sm-6">
+          <a href="{{ url_for('image_generation') }}">
+            <div class="item ultimate-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.4s">
+              <div class="showed-content">
+                <img src="{{ url_for('static', filename='assets/images/image-gallery.png') }}" alt="HD Image Generation" class="floating" />
+                <h3>4K Image Gen</h3>
+              </div>
+              <div class="hidden-content">
+                <p>Create stunning ultra-high-resolution images with advanced style controls and unlimited variations</p>
+                <span class="feature-badge">Ultimate Exclusive</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="col-lg-3 col-sm-6">
+          <a href="{{ url_for('audio_generation') }}">
+            <div class="item ultimate-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.5s">
+              <div class="showed-content">
+                <img src="{{ url_for('static', filename='assets/images/sound-waves.png') }}" alt="Audio Generation" class="floating" />
+                <h3>Studio Audio Gen</h3>
+              </div>
+              <div class="hidden-content">
+                <p>Convert text to natural-sounding speech with professional voice options and custom intonation</p>
+                <span class="feature-badge">Ultimate Feature</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="col-lg-3 col-sm-6">
+          <a href="video">
+            <div class="item ultimate-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+              <div class="showed-content">
+                <img src="{{ url_for('static', filename='assets/images/video.png') }}" alt="Video Generation" class="floating" />
+                <h3>Video Gen</h3>
+              </div>
+              <div class="hidden-content">
+                <p>Create professional video content from text prompts with scene transitions and animations</p>
+                <span class="feature-badge">Ultimate Feature</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <!-- New Service Card 1 -->
+        <div class="col-lg-3 col-sm-6">
+          <a href="{{ url_for('strategy_recommendation') }}">
+            <div class="item ultimate-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.7s">
+              <div class="showed-content">
+                <img src="{{ url_for('static', filename='assets/images/strategie-dentreprise.png') }}" alt="Sentiment Analysis" class="floating" />
+                <h3>Sentiment Analysis & Strategy recommendation</h3>
+              </div>
+              <div class="hidden-content">
+                <p>Advanced sentiment detection and personalized content recommendations based on audience reactions</p>
+                <span class="feature-badge">Ultimate Exclusive</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+          <a href="{{ url_for('generate_charte_bulk') }}">
+            <div class="item ultimate-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.7s">
+              <div class="showed-content">
+                <img src="{{ url_for('static', filename='assets/images/charte.png') }}" alt="Sentiment Analysis" class="floating" />
+                <h3>Graphic Charter</h3>
+              </div>
+              <div class="hidden-content">
+                <p>Advanced sentiment detection and personalized content recommendations based on audience reactions</p>
+                <span class="feature-badge">Ultimate Exclusive</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <!-- New Service Card 2 -->
+       
+      </div>
+    </div>
+  </section>
+
+  <!-- Ultimate Benefits Section -->
+  <section class="ultimate-benefits">
+    <div class="container">
+      <div class="section-title wow fadeIn">
+        <h2>Why Choose Ultimate?</h2>
+      </div>
+      
+      <div class="benefits-container">
+        <div class="benefit-card wow fadeInUp" data-wow-delay="0.2s">
+          <i class="fas fa-rocket"></i>
+          <h3>Maximum Priority</h3>
+          <p>Your content gets processed first with our highest priority queue system</p>
+        </div>
+        
+        <div class="benefit-card wow fadeInUp" data-wow-delay="0.4s">
+          <i class="fas fa-chart-pie"></i>
+          <h3>Advanced Analytics</h3>
+          <p>Get detailed insights and predictive analytics for your content strategy</p>
+        </div>
+        
+        <div class="benefit-card wow fadeInUp" data-wow-delay="0.6s">
+          <i class="fas fa-crown"></i>
+          <h3>Premium Templates</h3>
+          <p>Access all exclusive content templates plus custom template creation</p>
+        </div>
+        
+        <div class="benefit-card wow fadeInUp" data-wow-delay="0.2s">
+          <i class="fas fa-users-cog"></i>
+          <h3>Team Management</h3>
+          <p>Invite unlimited team members with role-based permissions</p>
+        </div>
+        
+        <div class="benefit-card wow fadeInUp" data-wow-delay="0.4s">
+          <i class="fas fa-database"></i>
+          <h3>Unlimited Storage</h3>
+          <p>Store all your generated content with our unlimited cloud storage</p>
+        </div>
+        
+        <div class="benefit-card wow fadeInUp" data-wow-delay="0.6s">
+          <i class="fas fa-headset"></i>
+          <h3>VIP Support</h3>
+          <p>24/7 dedicated support with personal account manager</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-title wow fadeIn">
+        <h2>What Our Ultimate Users Say</h2>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              "The Ultimate plan has transformed our entire content operation. The sentiment analysis helps us tailor content perfectly to our audience's mood."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jennifer L." />
+              </div>
+              <div class="author-info">
+                <h4>Jennifer L.</h4>
+                <p>Content Director</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 wow fadeIn" data-wow-delay="0.4s">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              "As an agency, the Ultimate plan gives us everything we need. The engagement prediction is scarily accurate - we've increased our CTR by 40%."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David K." />
+              </div>
+              <div class="author-info">
+                <h4>David K.</h4>
+                <p>Digital Agency Owner</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 wow fadeIn" data-wow-delay="0.6s">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              "The 4K video generation has replaced our entire production team for social content. The quality is broadcast-level at a fraction of the cost."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Sophia M." />
+              </div>
+              <div class="author-info">
+                <h4>Sophia M.</h4>
+                <p>Media Producer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise CTA Section -->
+  <section class="enterprise-cta">
+    <div class="container">
+      <h2 class="wow fadeIn">Need Custom Solutions?</h2>
+      <p class="wow fadeIn" data-wow-delay="0.2s">Contact us about our Enterprise plan for fully customized AI solutions tailored to your business needs</p>
+      <a href="#contact" class="enterprise-button wow fadeInUp" data-wow-delay="0.4s">Contact Sales</a>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script>
+    new WOW().init();
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

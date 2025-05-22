@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="MarketMind - AI-powered marketing solutions" />
+    <meta name="author" content="MarketMind" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <title>MarketMind - AI Marketing Solutions</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #f72585;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --success-color: #4cc9f0;
+        --error-color: #f72585;
+        --transition-speed: 0.4s;
+      }
+      
+      body {
+        background: linear-gradient(135deg, #001f3f, #004080, #3a0ca3, #4361ee);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        overflow-x: hidden;
+      }
+      
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      .background-shapes {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+      }
+      
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        animation: float 15s infinite ease-in-out;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+        transition: all var(--transition-speed) ease;
+      }
+      
+      .shape:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        top: -100px;
+        left: -100px;
+        animation-delay: 0s;
+        background: radial-gradient(circle, rgba(247,37,133,0.1) 0%, rgba(0,0,0,0) 70%);
+      }
+      
+      .shape:nth-child(2) {
+        width: 400px;
+        height: 400px;
+        bottom: -150px;
+        right: -150px;
+        animation-delay: 3s;
+        background: radial-gradient(circle, rgba(67,97,238,0.1) 0%, rgba(0,0,0,0) 70%);
+      }
+      
+      .shape:nth-child(3) {
+        width: 200px;
+        height: 200px;
+        top: 40%;
+        left: 20%;
+        animation-delay: 6s;
+        background: radial-gradient(circle, rgba(76,201,240,0.1) 0%, rgba(0,0,0,0) 70%);
+      }
+      
+      .shape:nth-child(4) {
+        width: 250px;
+        height: 250px;
+        bottom: 30%;
+        right: 20%;
+        animation-delay: 9s;
+        background: radial-gradient(circle, rgba(248,249,250,0.1) 0%, rgba(0,0,0,0) 70%);
+      }
+      
+      @keyframes float {
+        0%, 100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(20px, 20px) rotate(5deg);
+        }
+        50% {
+          transform: translate(0, 30px) rotate(0deg);
+        }
+        75% {
+          transform: translate(-20px, 20px) rotate(-5deg);
+        }
+      }
+      
+      /* Header Styles */
+      .header-area {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      .logo h4 {
+        color: white;
+        font-weight: 700;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        animation: textGlow 3s infinite alternate;
+      }
+      
+      .logo span {
+        color: var(--accent-color);
+      }
+      
+      .nav li a {
+        color: rgba(255, 255, 255, 0.8) !important;
+        transition: all var(--transition-speed) ease;
+      }
+      
+      .nav li a:hover, .nav li a.active {
+        color: white !important;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+      
+      .main-red-button a {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white !important;
+        border: none;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        transition: all var(--transition-speed) ease;
+      }
+      
+      .main-red-button a:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(67, 97, 238, 0.6);
+      }
+      
+      /* Main Banner */
+      .main-banner {
+        position: relative;
+        z-index: 1;
+        padding: 120px 0;
+      }
+      
+      .left-content {
+        color: white;
+      }
+      
+      .left-content h6 {
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 20px;
+        animation: fadeInLeft 1s ease forwards;
+      }
+      
+      .left-content h2 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        animation: fadeInLeft 1s ease forwards 0.3s;
+      }
+      
+      .left-content h2 em {
+        font-style: normal;
+        color: var(--accent-color);
+      }
+      
+      .left-content h2 span {
+        color: var(--success-color);
+      }
+      
+      .left-content p {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 30px;
+        animation: fadeInLeft 1s ease forwards 0.6s;
+      }
+      
+      .right-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+        animation: fadeInRight 1s ease forwards 0.3s;
+      }
+      
+      /* About Section */
+      .about-us {
+        position: relative;
+        padding: 100px 0;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        margin: 50px auto;
+        max-width: 95%;
+        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+      }
+      
+      .left-image img {
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        animation: fadeInLeft 1s ease forwards;
+      }
+      
+      .item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        transition: all var(--transition-speed) ease;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.15);
+      }
+      
+      .right-text h4 {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+      
+      .right-text p {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      /* Pricing Section */
+      .pricing-table {
+        position: relative;
+        padding: 100px 0;
+      }
+      
+      .section-heading {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      
+      .section-heading h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+      
+      .section-heading h2 em {
+        font-style: normal;
+        color: var(--accent-color);
+      }
+      
+      .section-heading h2 span {
+        color: var(--success-color);
+      }
+      
+      .section-heading p {
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .pricing-table-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+      }
+      
+      .plan-header {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        transition: all var(--transition-speed) ease;
+      }
+      
+      .popular-plan {
+        background: rgba(67, 97, 238, 0.2);
+        border: 1px solid var(--primary-color);
+        transform: scale(1.05);
+      }
+      
+      .plan-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 10px;
+      }
+      
+      .plan-price {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 20px;
+      }
+      
+      .plan-price span {
+        font-size: 1rem;
+        font-weight: 400;
+      }
+      
+      .main-button {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white !important;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: all var(--transition-speed) ease;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+      
+      .main-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(67, 97, 238, 0.6);
+      }
+      
+      .popular-badge {
+        background: var(--accent-color);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+      
+      /* Portfolio Section */
+      .our-portfolio {
+        position: relative;
+        padding: 100px 0;
+      }
+      
+      .item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        transition: all var(--transition-speed) ease;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+      
+      .showed-content {
+        padding: 30px;
+        text-align: center;
+      }
+      
+      .showed-content img {
+        max-width: 100%;
+        height: auto;
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+      }
+      
+      .hidden-content {
+        background: rgba(67, 97, 238, 0.8);
+        padding: 20px;
+        text-align: center;
+        opacity: 0;
+        transition: all var(--transition-speed) ease;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      
+      .item:hover .hidden-content {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .hidden-content h4 {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      
+      .hidden-content p {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0;
+      }
+      
+      /* Team Section */
+      .our-team {
+        position: relative;
+        padding: 100px 0;
+      }
+      
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        transition: all var(--transition-speed) ease;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+      
+      .team-img-wrapper {
+        padding: 30px 30px 0;
+      }
+      
+      .team-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      
+      .card-body {
+        padding: 20px;
+        text-align: center;
+      }
+      
+      .card-title {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      
+      .card-text {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      /* Contact Section */
+      .contact-us {
+        position: relative;
+        padding: 100px 0;
+      }
+      
+      .contact-us .section-heading {
+        text-align: left;
+      }
+      
+      form {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+      }
+      
+      input, textarea {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        margin-bottom: 20px;
+        transition: all var(--transition-speed) ease;
+      }
+      
+      input:focus, textarea:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 0 0 2px var(--accent-color);
+      }
+      
+      input::placeholder, textarea::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      
+      /* Footer */
+      footer {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 30px 0;
+        text-align: center;
+      }
+      
+      footer p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 0;
+      }
+      
+      footer a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: all var(--transition-speed) ease;
+      }
+      
+      footer a:hover {
+        color: white;
+        text-decoration: underline;
+      }
+      
+      /* Animations */
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes textGlow {
+        from {
+          text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        to {
+          text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 20px rgba(67, 97, 238, 0.4);
+        }
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .left-content h2 {
+          font-size: 2.2rem;
+        }
+        
+        .left-image {
+          margin-bottom: 50px;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .left-content h2 {
+          font-size: 1.8rem;
+        }
+        
+        .plan-header {
+          margin-bottom: 30px;
+        }
+        
+        .popular-plan {
+          transform: scale(1);
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .left-content h2 {
+          font-size: 1.5rem;
+        }
+        
+        .section-heading h2 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Background Shapes -->
+    <div class="background-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <h4>Market<span>Mind</span></h4>
+              </a>
+              <!-- ***** Logo End ***** -->
+
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="#about">About Us</a></li>
+                <li class="scroll-to-section"><a href="#portfolio">Portfolio</a></li>
+                <li class="scroll-to-section"><a href="#contact">Message Us</a></li>
+                <li class="scroll-to-section">
+                  <div class="main-red-button">
+                    <a href="#contact">Contact Now</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-6 align-self-center">
+                <div class="left-content header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+                  <h6>Welcome to MARKETMIND</h6>
+                  <h2>We Make <em>Digital</em> <span>Marketing</span> <em>Content</em></h2>
+                  <p>
+                    MarketMind empowers small businesses with AI-driven marketing, giving them the tools to predict trends, optimize ads, and stay ahead of the competition. In a world where data is power, those who embrace AI will thrive—while others risk falling behind. 
+                    <br /><br />
+                    <strong>Join us and unlock the future of marketing.</strong>
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                  <img src="{{ url_for('static', filename='assets/images/banner-right-image.png') }}" alt="team meeting" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** About Us Start ***** -->
+    <div id="about" class="about-us section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="left-image wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+              <img src="{{ url_for('static', filename='assets/images/about-left-image.png') }}" alt="person graphic" />
+            </div>
+          </div>
+          <div class="col-lg-8 align-self-center">
+            <div class="services">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="item wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <div class="icon">
+                      <img src="{{ url_for('static', filename='assets/images/service-icon-01.png') }}" alt="reporting" />
+                    </div>
+                    <div class="right-text">
+                      <h4>Content Generation</h4>
+                      <p>Generate quality content across multiple formats: text, image, video, audio</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="item wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
+                    <div class="icon">
+                      <img src="{{ url_for('static', filename='assets/images/service-icon-02.png') }}" alt="" />
+                    </div>
+                    <div class="right-text">
+                      <h4>Sentiment Analysis</h4>
+                      <p>Understand what their audience really feels, through sentiment analysis</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="item wow fadeIn" data-wow-duration="1s" data-wow-delay="0.9s">
+                    <div class="icon">
+                      <img src="{{ url_for('static', filename='assets/images/service-icon-03.png') }}" alt="" />
+                    </div>
+                    <div class="right-text">
+                      <h4>Audience Targeting</h4>
+                      <p>Adapt the tone and style to match each platform and target audience</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="item wow fadeIn" data-wow-duration="1s" data-wow-delay="1.1s">
+                    <div class="icon">
+                      <img src="{{ url_for('static', filename='assets/images/service-icon-04.png') }}" alt="" />
+                    </div>
+                    <div class="right-text">
+                      <h4>Resource efficiency</h4>
+                      <p>Above all, to do all this efficiently, saving time and budget</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ***** About Us End ***** -->
+
+    <!-- ***** Pricing Table Start ***** -->
+    <div id="pricing" class="pricing-table section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+              <h2>Our <em>Pricing</em> Plans</h2>
+              <p>Choose the plan that fits your business needs</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="pricing-table-container wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
+              <table class="pricing-table">
+                <thead>
+                  <tr>
+                    <th class="feature-header">Features</th>
+                    <th class="plan-header">
+                      <div class="plan-name">Free</div>
+                      <div class="plan-price">$0<span>/month</span></div>
+                      <a href="free" class="main-button animate__animated animate__pulse animate__infinite">Get Started</a>
+                    </th>
+                    <th class="plan-header popular-plan">
+                      <div class="popular-badge animate__animated animate__heartBeat animate__infinite animate__slower">Most Popular</div>
+                      <div class="plan-name">Premium</div>
+                      <div class="plan-price">$29<span>/month</span></div>
+                      <a href="premium" class="main-button animate__animated animate__pulse animate__infinite">Buy Now</a>
+                    </th>
+                    <th class="plan-header">
+                      <div class="plan-name">Ultimate</div>
+                      <div class="plan-price">$99<span>/month</span></div>
+                      <a href="#" class="main-button animate__animated animate__pulse animate__infinite">Contact Sales</a>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="feature-row">
+                    <td class="feature-name"><i class="fas fa-font feature-icon"></i> Textual Generation</td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  </tr>
+                  <tr class="feature-row">
+                    <td class="feature-name"><i class="fas fa-image feature-icon"></i> Image Generation</td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  </tr>
+                  <tr class="feature-row">
+                    <td class="feature-name"><i class="fas fa-music feature-icon"></i> Audio Generation</td>
+                    <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  </tr>
+                  <tr class="feature-row">
+                    <td class="feature-name"><i class="fas fa-video feature-icon"></i> Video Generation</td>
+                    <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  </tr>
+                  <tr class="feature-row">
+                    <td class="feature-name"><i class="fas fa-chart-line feature-icon"></i> Sentiment Analysis & Recommendations</td>
+                    <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-limited"><i class="fas fa-minus-circle warning-icon animate__animated animate__bounceIn"></i> Limited</td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  </tr>
+                  <tr class="feature-row">
+                    <td class="feature-name"><i class="fas fa-bullseye feature-icon"></i> Engagement Prediction</td>
+                    <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                    <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Pricing Table End ***** -->
+
+    <!-- ***** Portfolio Start ***** -->
+    <div id="portfolio" class="our-portfolio section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
+              <h2>
+                See What Our Agency <em>Offers</em> &amp; What We <span>Provide</span>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-sm-6">
+            <a href="{{ url_for('text_generation') }}">
+              <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+                <div class="hidden-content">
+                  <h4>Text generation</h4>
+                  <p>Generate ad text from your idea</p>
+                </div>
+                <div class="showed-content">
+                  <img src="{{ url_for('static', filename='assets/images/2921747.png') }}" alt="" />
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <a href="{{ url_for('image_generation') }}">
+              <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.4s">
+                <div class="hidden-content">
+                  <h4>Image Generation</h4>
+                  <p>Create images based on your description</p>
+                </div>
+                <div class="showed-content">
+                  <img src="{{ url_for('static', filename='assets/images/image-gallery.png') }}" alt="Image Generation" />
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <a href="#">
+              <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div class="hidden-content">
+                  <h4>Video generation</h4>
+                  <p></p>
+                </div>
+                <div class="showed-content">
+                  <img src="{{ url_for('static', filename='assets/images/video.png') }}" alt="" />
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <a href="#">
+              <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+                <div class="hidden-content">
+                  <h4>Audio generation</h4>
+                  <p></p>
+                </div>
+                <div class="showed-content">
+                  <img src="{{ url_for('static', filename='assets/images/sound-waves.png') }}" alt="" />
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Portfolio End ***** -->
+
+    <!-- ***** Team Start ***** -->
+    <div id="team" class="our-team section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="section-heading text-center">
+              <h2>Meet Our <em>Team</em> Members</h2>
+              <p>Our experts driving innovation and growth at MarketMind</p>
+            </div>
+          </div>
+        </div>
+   <br><br>
+   <br><br>
+<div class="row justify-content-center gy-4 gx-4">
+  <!-- Team Member 1 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/yas.jpg') }}" class="team-img" alt="Team Member 1">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Yassine Zayane</h5>
+        <p class="card-text">Solution architect</p>
+      </div>
+    </div>
+  </div>
+  <!-- Team Member 2 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/had.jpg') }}" class="team-img" alt="Team Member 2">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Hadil Sediri</h5>
+        <p class="card-text">Project Lead</p>
+      </div>
+    </div>
+  </div>
+  <!-- Team Member 3 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/sar.jpg') }}" class="team-img" alt="Team Member 3">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Sarra Hamouda</h5>
+        <p class="card-text">Business Analyst</p>
+      </div>
+    </div>
+  </div>
+  <!-- Team Member 4 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/amine.png') }}" class="team-img" alt="Team Member 4">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Amine Yahyaoui</h5>
+        <p class="card-text">Application developer</p>
+      </div>
+    </div>
+  </div>
+  <!-- Team Member 5 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/sam.jpg') }}" class="team-img" alt="Team Member 5">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Sami Ghazouani</h5>
+        <p class="card-text">Data scientist</p>
+      </div>
+    </div>
+  </div>
+
+      <!-- Team Member 6 -->
+      <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+        <div class="card text-center border-0">
+          <div class="team-img-wrapper">
+<img src="{{ url_for('static', filename='assets/images/tout.jpg') }}" class="team-img" alt="Team Member 6">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Eya Touti</h5>
+            <p class="card-text">Data engineer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ***** Team Section End ***** -->
+
+
+   
+    <div id="contact" class="contact-us section">
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-6 align-self-center wow fadeInLeft"
+            data-wow-duration="0.5s"
+            data-wow-delay="0.25s"
+          >
+            <div class="section-heading">
+              <h2>Feel Free To Send Us a Message About Your Website Needs</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                doer ket eismod tempor incididunt ut labore et dolores
+              </p>
+              <div class="phone-info">
+                <h4>
+                  For any enquiry, Call Us:
+                  <span
+                    ><i class="fa fa-phone"></i>
+                    <a href="#">010-020-0340</a></span
+                  >
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-lg-6 wow fadeInRight"
+            data-wow-duration="0.5s"
+            data-wow-delay="0.25s"
+          >
+            <form id="contact" action="" method="post">
+              <div class="row">
+                <div class="col-lg-6">
+                  <fieldset>
+                    <input
+                      type="name"
+                      name="name"
+                      id="name"
+                      placeholder="Name"
+                      autocomplete="on"
+                      required
+                    />
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <input
+                      type="surname"
+                      name="surname"
+                      id="surname"
+                      placeholder="Surname"
+                      autocomplete="on"
+                      required
+                    />
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <input
+                      type="text"
+                      name="email"
+                      id="email"
+                      pattern="[^ @]*@[^ @]*"
+                      placeholder="Your Email"
+                      required=""
+                    />
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <textarea
+                      name="message"
+                      type="text"
+                      class="form-control"
+                      id="message"
+                      placeholder="Message"
+                      required=""
+                    ></textarea>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="main-button">
+                      Send Message
+                    </button>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="contact-dec">
+<img src="{{ url_for('static', filename='assets/images/contact-decoration.png') }}" alt="" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-12 wow fadeIn"
+            data-wow-duration="1s"
+            data-wow-delay="0.25s"
+          >
+            <p>
+              © Copyright 2021 Space Dynamic Co. All Rights Reserved.
+
+              <br />Design:
+              <a rel="nofollow" href="https://templatemo.com">TemplateMo</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Scripts -->
+   <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/owl-carousel.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/animation.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/imagesloaded.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/templatemo-custom.js') }}"></script>
+
+  </body>
+</html>

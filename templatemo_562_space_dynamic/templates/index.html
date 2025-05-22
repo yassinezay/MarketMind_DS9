@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Google Fonts (pas besoin de changer) -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <title>Space Dynamic - SEO HTML5 Template</title>
+
+    <!-- Bootstrap core CSS (via dossier static) -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <!-- Additional CSS Files (via dossier static) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-space-dynamic.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animated.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}" />
+
+    <!-- TemplateMo 562 Space Dynamic -->
+    <link rel="stylesheet" href="https://templatemo.com/tm-562-space-dynamic" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  </head>
+
+  <body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <h4>Nova<span>souk</span></h4>
+              </a>
+              <!-- ***** Logo End ***** -->
+
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="#about">About Us</a></li>
+                <li class="scroll-to-section"><a href="#pricing">Services</a></li>
+                <li class="scroll-to-section"><a href="#contact">Message Us</a></li>
+                <li class="scroll-to-section">
+                  <div class="main-red-button">
+                    <a href="#contact">Contact Now</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-6 align-self-center">
+                <div class="left-content header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+                  <h6>Welcome to NOVASOUK</h6>
+                  <h2>We Make <em>Digital</em> <span>Marketing</span> <em>Content</em></h2>
+                  <p>
+                    NovaSouk empowers small businesses with AI-driven marketing, giving them the tools to predict trends, optimize ads, and stay ahead of the competition. In a world where data is power, those who embrace AI will thrive—while others risk falling behind. 
+                    <br /><br />
+                    <strong>Join us and unlock the future of marketing.</strong>
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                  <img src="{{ url_for('static', filename='assets/images/banner-right-image.png') }}" alt="team meeting" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+   <div id="about" class="about-us section" style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 100px 0; overflow: hidden;">
+  <div class="container">
+    <!-- Animated Background Elements -->
+    <div class="position-absolute top-0 start-0 w-100 h-100">
+      <div class="position-absolute" style="width: 300px; height: 300px; border-radius: 50%; background: rgba(160, 0, 0, 0.03); top: -150px; right: -150px;"></div>
+      <div class="position-absolute" style="width: 200px; height: 200px; border-radius: 50%; background: rgba(160, 0, 0, 0.05); bottom: -100px; left: -100px;"></div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="row justify-content-center mb-6">
+      <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-duration="800">
+        <h6 class="text-uppercase mb-3" style="color: #a00000; letter-spacing: 2px;">Our Services</h6>
+        <h2 class="display-5 mb-4" style="font-weight: 700; color: #212529;">Powerful Solutions for <span style="color: #a00000;">Your Business</span></h2>
+        <div class="divider mx-auto" style="width: 80px; height: 3px; background: #a00000; margin: 20px auto;"></div>
+      </div>
+    </div>
+
+    <!-- Services Cards -->
+    <div class="row g-4 justify-content-center">
+      <!-- Card 1 -->
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="card service-card h-100 border-0 rounded-4 overflow-hidden position-relative" 
+             data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <div class="card-body p-5 text-center">
+            <div class="icon-wrapper mb-4 mx-auto" style="width: 100px; height: 100px; background: linear-gradient(135deg, rgba(160,0,0,0.1) 0%, rgba(160,0,0,0.2) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; transition: all 0.5s ease;">
+              <img src="{{ url_for('static', filename='assets/images/service-icon-01.png') }}" alt="Content Generation" style="width: 60px; height: 60px; transition: all 0.5s ease;" />
+            </div>
+            <h4 class="mb-3" style="color: #212529; font-weight: 600;">Content Generation</h4>
+            <p class="mb-4" style="color: #6c757d;">Generate quality content across multiple formats: text, image, video, audio</p>
+            <a href="#" class="btn-link" style="color: #a00000; text-decoration: none; font-weight: 500; position: relative;">
+              Learn More
+              <span class="ps-2" style="display: inline-block; transition: transform 0.3s ease;">→</span>
+            </a>
+          </div>
+          <div class="hover-effect" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(160,0,0,0.03) 0%, rgba(160,0,0,0.01) 100%); z-index: -1; opacity: 0; transition: all 0.5s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="card service-card h-100 border-0 rounded-4 overflow-hidden position-relative" 
+             data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <div class="card-body p-5 text-center">
+            <div class="icon-wrapper mb-4 mx-auto" style="width: 100px; height: 100px; background: linear-gradient(135deg, rgba(160,0,0,0.1) 0%, rgba(160,0,0,0.2) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; transition: all 0.5s ease;">
+              <img src="{{ url_for('static', filename='assets/images/service-icon-02.png') }}" alt="Sentiment Analysis" style="width: 60px; height: 60px; transition: all 0.5s ease;" />
+            </div>
+            <h4 class="mb-3" style="color: #212529; font-weight: 600;">Sentiment Analysis</h4>
+            <p class="mb-4" style="color: #6c757d;">Understand what their audience really feels, through sentiment analysis</p>
+            <a href="#" class="btn-link" style="color: #a00000; text-decoration: none; font-weight: 500; position: relative;">
+              Learn More
+              <span class="ps-2" style="display: inline-block; transition: transform 0.3s ease;">→</span>
+            </a>
+          </div>
+          <div class="hover-effect" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(160,0,0,0.03) 0%, rgba(160,0,0,0.01) 100%); z-index: -1; opacity: 0; transition: all 0.5s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="card service-card h-100 border-0 rounded-4 overflow-hidden position-relative" 
+             data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+          <div class="card-body p-5 text-center">
+            <div class="icon-wrapper mb-4 mx-auto" style="width: 100px; height: 100px; background: linear-gradient(135deg, rgba(160,0,0,0.1) 0%, rgba(160,0,0,0.2) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; transition: all 0.5s ease;">
+              <img src="{{ url_for('static', filename='assets/images/service-icon-03.png') }}" alt="Audience Targeting" style="width: 60px; height: 60px; transition: all 0.5s ease;" />
+            </div>
+            <h4 class="mb-3" style="color: #212529; font-weight: 600;">Audience Targeting</h4>
+            <p class="mb-4" style="color: #6c757d;">Adapt the tone and style to match each platform and target audience</p>
+            <a href="#" class="btn-link" style="color: #a00000; text-decoration: none; font-weight: 500; position: relative;">
+              Learn More
+              <span class="ps-2" style="display: inline-block; transition: transform 0.3s ease;">→</span>
+            </a>
+          </div>
+          <div class="hover-effect" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(160,0,0,0.03) 0%, rgba(160,0,0,0.01) 100%); z-index: -1; opacity: 0; transition: all 0.5s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="card service-card h-100 border-0 rounded-4 overflow-hidden position-relative" 
+             data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+          <div class="card-body p-5 text-center">
+            <div class="icon-wrapper mb-4 mx-auto" style="width: 100px; height: 100px; background: linear-gradient(135deg, rgba(160,0,0,0.1) 0%, rgba(160,0,0,0.2) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; transition: all 0.5s ease;">
+              <img src="{{ url_for('static', filename='assets/images/service-icon-04.png') }}" alt="Resource efficiency" style="width: 60px; height: 60px; transition: all 0.5s ease;" />
+            </div>
+            <h4 class="mb-3" style="color: #212529; font-weight: 600;">Resource Efficiency</h4>
+            <p class="mb-4" style="color: #6c757d;">Above all, to do all this efficiently, saving time and budget</p>
+            <a href="#" class="btn-link" style="color: #a00000; text-decoration: none; font-weight: 500; position: relative;">
+              Learn More
+              <span class="ps-2" style="display: inline-block; transition: transform 0.3s ease;">→</span>
+            </a>
+          </div>
+          <div class="hover-effect" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(160,0,0,0.03) 0%, rgba(160,0,0,0.01) 100%); z-index: -1; opacity: 0; transition: all 0.5s ease;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Animation CSS -->
+<style>
+  /* Card Hover Effects */
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+  }
+  
+  .service-card {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    background: white;
+  }
+  
+  .service-card:hover .icon-wrapper {
+    transform: rotate(5deg) scale(1.1);
+    background: linear-gradient(135deg, rgba(160,0,0,0.15) 0%, rgba(160,0,0,0.25) 100%) !important;
+  }
+  
+  .service-card:hover .hover-effect {
+    opacity: 1;
+  }
+  
+  .service-card:hover img {
+    transform: scale(1.1);
+  }
+  
+  .service-card:hover .btn-link span {
+    transform: translateX(5px);
+  }
+  
+  /* Animation Classes */
+  [data-aos="fade-up"] {
+    opacity: 0;
+    transition-property: transform, opacity;
+  }
+  
+  [data-aos="fade-up"].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<!-- JavaScript for Animations -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    offset: 100
+  });
+</script>
+
+
+  <!-- [HEADER AND BANNER SECTIONS REMAIN THE SAME] -->
+
+  <!-- PRICING TABLE SECTION -->
+  <div id="pricing" class="pricing-table section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center mb-5" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-3">Our <span class="text-danger">Pricing</span> Plans</h2>
+        <p class="text-muted fs-5">Choose the plan that fits your business needs</p>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="pricing-table-container wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
+            <table class="pricing-table">
+              <thead>
+                <tr>
+                  <th class="feature-header">Features</th>
+                  <th class="plan-header">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">0 DT<span>/month</span></div>
+                    <a href="free " class="main-button animate__animated animate__pulse animate__infinite">Get Started</a>
+                  </th>
+                  <th class="plan-header popular-plan">
+                    <div class="popular-badge animate__animated animate__heartBeat animate__infinite animate__slower">Most Popular</div>
+                    <div class="plan-name">Premium</div>
+                    <div class="plan-price">159 DT<span>/month</span></div>
+                    <a href="premium" class="main-button animate__animated animate__pulse animate__infinite">Buy Now</a>
+                  </th>
+                  <th class="plan-header">
+                    <div class="plan-name">Ultimate</div>
+                    <div class="plan-price">399 DT<span>/month</span></div>
+                    <a href="ultimate" class="main-button animate__animated animate__pulse animate__infinite">Contact Sales</a>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="feature-row">
+                  <td class="feature-name"><i class="fas fa-font feature-icon"></i> Textual Generation</td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                </tr>
+                <tr class="feature-row">
+                  <td class="feature-name"><i class="fas fa-image feature-icon"></i> Image Generation</td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                </tr>
+                <tr class="feature-row">
+                  <td class="feature-name"><i class="fas fa-music feature-icon"></i> Audio Generation</td>
+                  <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                </tr>
+                <tr class="feature-row">
+                  <td class="feature-name"><i class="fas fa-video feature-icon"></i> Video Generation</td>
+                  <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                </tr>
+                <tr class="feature-row">
+                  <td class="feature-name"><i class="fas fa-chart-line feature-icon"></i> Sentiment Analysis & Recommendations</td>
+                  <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-limited"><i class="fas fa-minus-circle warning-icon animate__animated animate__bounceIn"></i> Limited</td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                </tr>
+                <tr class="feature-row">
+                  <td class="feature-name"><i class="fas fa-bullseye feature-icon"></i> Engagement Prediction</td>
+                  <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-unavailable"><i class="fas fa-times-circle danger-icon animate__animated animate__bounceIn"></i></td>
+                  <td class="feature-available"><i class="fas fa-check-circle success-icon animate__animated animate__bounceIn"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add this CSS to your existing styles -->
+
+<!-- PRICING TABLE SECTION -->
+
+<div id="pricing" class="pricing-section" style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 100px 0; position: relative; overflow: hidden;">
+  <!-- Decorative Elements -->
+  <div class="position-absolute top-0 start-0 w-100 h-100">
+    <div class="position-absolute" style="width: 400px; height: 400px; border-radius: 50%; background: rgba(160, 0, 0, 0.03); top: -200px; right: -200px;"></div>
+    <div class="position-absolute" style="width: 300px; height: 300px; border-radius: 50%; background: rgba(160, 0, 0, 0.05); bottom: -150px; left: -150px;"></div>
+  </div>
+
+  <div class="container position-relative">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-6" data-aos="fade-up">
+        <h6 class="text-uppercase mb-3" style="color: #a00000; letter-spacing: 2px;">Pricing Plans</h6>
+        <h2 class="display-5 mb-3" style="font-weight: 700; color: #212529;">Choose Your <span style="color: #a00000;">Perfect Plan</span></h2>
+        <p class="lead" style="color: #6c757d;">Flexible options designed for businesses of all sizes</p>
+        <div class="divider mx-auto" style="width: 80px; height: 3px; background: #a00000; margin: 20px auto;"></div>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Free Plan -->
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="pricing-card h-100" style="border-radius: 15px; overflow: hidden; transition: all 0.5s ease;">
+          <div class="pricing-header p-5 text-center" style="background: white; border-bottom: 3px solid #e9ecef;">
+            <h4 class="mb-3" style="color: #212529; font-weight: 600;">Free</h4>
+            <div class="price mb-4" style="font-size: 3rem; font-weight: 700; color: #212529;">
+              0 DT<span style="font-size: 1rem; color: #6c757d;">/month</span>
+            </div>
+            <p class="mb-4" style="color: #6c757d;">Perfect for getting started</p>
+            <a href="free" class="btn w-100 py-3" style="background-color: white; color: #a00000; border: 2px solid #a00000; border-radius: 30px; font-weight: 600; transition: all 0.3s ease;">
+              Get Started
+            </a>
+          </div>
+          <div class="pricing-features p-5" style="background: white;">
+            <ul class="list-unstyled">
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Textual Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Image Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-times-circle me-3" style="color: #dc3545; font-size: 1.25rem;"></i>
+                <span style="color: #6c757d;">Audio Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-times-circle me-3" style="color: #dc3545; font-size: 1.25rem;"></i>
+                <span style="color: #6c757d;">Video Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-times-circle me-3" style="color: #dc3545; font-size: 1.25rem;"></i>
+                <span style="color: #6c757d;">Sentiment Analysis</span>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="fas fa-times-circle me-3" style="color: #dc3545; font-size: 1.25rem;"></i>
+                <span style="color: #6c757d;">Engagement Prediction</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium Plan (Popular) -->
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="pricing-card h-100" style="border-radius: 15px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: translateY(-10px); transition: all 0.5s ease; position: relative;">
+          <div class="popular-badge" style="position: absolute; top: 0; right: 20px; background: #a00000; color: white; padding: 8px 20px; font-size: 0.8rem; font-weight: 600; border-radius: 0 0 15px 15px; z-index: 2;">
+            Most Popular
+          </div>
+          <div class="pricing-header p-5 text-center" style="background: #a00000; border-bottom: 3px solid #a00000;">
+            <h4 class="mb-3" style="color: white; font-weight: 600;">Premium</h4>
+            <div class="price mb-4" style="font-size: 3rem; font-weight: 700; color: white;">
+              159 DT<span style="font-size: 1rem; color: rgba(255,255,255,0.7);">/month</span>
+            </div>
+            <p class="mb-4" style="color: rgba(255,255,255,0.8);">Best for growing businesses</p>
+            <a href="premium" class="btn w-100 py-3" style="background-color: white; color: #a00000; border: 2px solid white; border-radius: 30px; font-weight: 600; transition: all 0.3s ease;">
+              Buy Now
+            </a>
+          </div>
+          <div class="pricing-features p-5" style="background: white;">
+            <ul class="list-unstyled">
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Textual Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Image Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Audio Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Video Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-minus-circle me-3" style="color: #ffc107; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Sentiment Analysis (Limited)</span>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="fas fa-times-circle me-3" style="color: #dc3545; font-size: 1.25rem;"></i>
+                <span style="color: #6c757d;">Engagement Prediction</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ultimate Plan -->
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="pricing-card h-100" style="border-radius: 15px; overflow: hidden; transition: all 0.5s ease;">
+          <div class="pricing-header p-5 text-center" style="background: #212529; border-bottom: 3px solid #212529;">
+            <h4 class="mb-3" style="color: white; font-weight: 600;">Ultimate</h4>
+            <div class="price mb-4" style="font-size: 3rem; font-weight: 700; color: white;">
+              399 DT<span style="font-size: 1rem; color: rgba(255,255,255,0.7);">/month</span>
+            </div>
+            <p class="mb-4" style="color: rgba(255,255,255,0.8);">For enterprise solutions</p>
+            <a href="ultimate" class="btn w-100 py-3" style="background-color: #a00000; color: white; border: 2px solid #a00000; border-radius: 30px; font-weight: 600; transition: all 0.3s ease;">
+              Contact Sales
+            </a>
+          </div>
+          <div class="pricing-features p-5" style="background: white;">
+            <ul class="list-unstyled">
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Textual Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Image Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Audio Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Video Generation</span>
+              </li>
+              <li class="mb-3 d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Sentiment Analysis</span>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="fas fa-check-circle me-3" style="color: #28a745; font-size: 1.25rem;"></i>
+                <span style="color: #212529;">Engagement Prediction</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Animation CSS -->
+<style>
+  /* Pricing Card Hover Effects */
+  .pricing-card:hover {
+    transform: translateY(-15px) !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15) !important;
+  }
+  
+  /* Popular Card Animation */
+  .popular-badge {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Feature List Animations */
+  .pricing-features li {
+    transition: all 0.3s ease;
+  }
+  
+  .pricing-features li:hover {
+    transform: translateX(5px);
+  }
+  
+  /* Button Hover Effects */
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+</style>
+
+<!-- JavaScript for Animations -->
+<script>
+  // Initialize AOS animations
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    offset: 100
+  });
+</script>
+{# 
+  <div id="portfolio" class="our-portfolio section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
+          <h2>
+            See What Our Agency <em>Offers</em> &amp; What We <span>Provide</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-sm-6">
+        <a href="{{ url_for('text_generation') }}">
+          <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+            <div class="hidden-content">
+              <h4>Text generation</h4>
+              <p>Generate ad text from your idea</p>
+            </div>
+            <div class="showed-content">
+              <img src="{{ url_for('static', filename='assets/images/2921747.png') }}" alt="" />
+            </div>
+          </div>
+        </a>
+      </div>
+     <div class="col-lg-3 col-sm-6">
+  <a href="{{ url_for('image_generation') }}"> <!-- Link to the 'generate_image' route -->
+    <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.4s">
+      <div class="hidden-content">
+        <h4>Image Generation</h4> <!-- Section heading -->
+        <p>Create images based on your description</p> <!-- Description (optional) -->
+      </div>
+      <div class="showed-content">
+        <img src="{{ url_for('static', filename='assets/images/image-gallery.png') }}" alt="Image Generation" />
+      </div>
+    </div>
+  </a>
+</div>
+
+      <div class="col-lg-3 col-sm-6">
+        <a href="#">
+          <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.5s">
+            <div class="hidden-content">
+              <h4>Video generation</h4>
+              <p></p>
+            </div>
+            <div class="showed-content">
+              <img src="{{ url_for('static', filename='assets/images/video.png') }}" alt="" />
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <a href="#">
+          <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="hidden-content">
+              <h4>Audio generation</h4>
+              <p></p>
+            </div>
+            <div class="showed-content">
+              <img src="{{ url_for('static', filename='assets/images/sound-waves.png') }}" alt="" />
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+ #}
+    <br /><br /><br /><br />
+    <br /><br />
+  
+
+<!-- ***** Team Section Start ***** -->
+<div id="team" class="our-team section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="section-heading text-center">
+          <h2>Meet Our <em>Team</em> Members</h2>
+          <p>Our experts driving innovation and growth at MarketMind</p>
+        </div>
+      </div>
+    </div>
+    
+   <br><br>
+   <br><br>
+<div class="row justify-content-center gy-4 gx-4">
+  <!-- Team Member 1 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/yas.jpg') }}" class="team-img" alt="Team Member 1">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Yassine Zayane</h5>
+        <p class="card-text">Solution architect</p>
+      </div>
+    </div>
+  </div>
+  <!-- Team Member 2 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/had.jpg') }}" class="team-img" alt="Team Member 2">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Hadil Sediri</h5>
+        <p class="card-text">Project Lead</p>
+      </div>
+    </div>
+  </div>
+  <!-- Team Member 3 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/sar.jpg') }}" class="team-img" alt="Team Member 3">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Sarra Hamouda</h5>
+        <p class="card-text">Business Analyst</p>
+      </div>
+    </div>
+  </div>
+  <!-- Team Member 4 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/amine.png') }}" class="team-img" alt="Team Member 4">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Amine Yahyaoui</h5>
+        <p class="card-text">Application developer</p>
+      </div>
+    </div>
+  </div>
+  <!-- Team Member 5 -->
+  <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+    <div class="card text-center border-0">
+      <div class="team-img-wrapper">
+        <img src="{{ url_for('static', filename='assets/images/sam.jpg') }}" class="team-img" alt="Team Member 5">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Sami Ghazouani</h5>
+        <p class="card-text">Data scientist</p>
+      </div>
+    </div>
+  </div>
+
+      <!-- Team Member 6 -->
+      <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+        <div class="card text-center border-0">
+          <div class="team-img-wrapper">
+<img src="{{ url_for('static', filename='assets/images/tout.jpg') }}" class="team-img" alt="Team Member 6">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Eya Touti</h5>
+            <p class="card-text">Data engineer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ***** Team Section End ***** -->
+
+
+   
+    <div id="contact" class="contact-us section">
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-6 align-self-center wow fadeInLeft"
+            data-wow-duration="0.5s"
+            data-wow-delay="0.25s"
+          >
+            <div class="section-heading">
+              <h2>Feel Free To Send Us a Message About Your Website Needs</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                doer ket eismod tempor incididunt ut labore et dolores
+              </p>
+              <div class="phone-info">
+                <h4>
+                  For any enquiry, Call Us:
+                  <span
+                    ><i class="fa fa-phone"></i>
+                    <a href="#">010-020-0340</a></span
+                  >
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-lg-6 wow fadeInRight"
+            data-wow-duration="0.5s"
+            data-wow-delay="0.25s"
+          >
+            <form id="contact" action="" method="post">
+              <div class="row">
+                <div class="col-lg-6">
+                  <fieldset>
+                    <input
+                      type="name"
+                      name="name"
+                      id="name"
+                      placeholder="Name"
+                      autocomplete="on"
+                      required
+                    />
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <input
+                      type="surname"
+                      name="surname"
+                      id="surname"
+                      placeholder="Surname"
+                      autocomplete="on"
+                      required
+                    />
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <input
+                      type="text"
+                      name="email"
+                      id="email"
+                      pattern="[^ @]*@[^ @]*"
+                      placeholder="Your Email"
+                      required=""
+                    />
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <textarea
+                      name="message"
+                      type="text"
+                      class="form-control"
+                      id="message"
+                      placeholder="Message"
+                      required=""
+                    ></textarea>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="main-button">
+                      Send Message
+                    </button>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="contact-dec">
+<img src="{{ url_for('static', filename='assets/images/contact-decoration.png') }}" alt="" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-12 wow fadeIn"
+            data-wow-duration="1s"
+            data-wow-delay="0.25s"
+          >
+            <p>
+              © Copyright 2021 Space Dynamic Co. All Rights Reserved.
+
+              <br />Design:
+              <a rel="nofollow" href="https://templatemo.com">TemplateMo</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Scripts -->
+   <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/owl-carousel.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/animation.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/imagesloaded.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/templatemo-custom.js') }}"></script>
+
+  </body>
+</html>

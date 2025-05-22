@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MarketMind - AI Ad Text Generator with Engagement</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-space-dynamic.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animated.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}" />
+
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #f72585;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        --gradient-accent: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        --transition-speed: 0.4s;
+        --border-radius: 16px;
+      }
+      
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8fafc;
+        color: var(--dark-color);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+        background-image: 
+          radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.08) 0%, transparent 25%),
+          radial-gradient(circle at 90% 80%, rgba(247, 37, 133, 0.08) 0%, transparent 25%);
+        animation: gradientShift 20s ease infinite;
+        background-size: 200% 200%;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }
+        100% { background-position: 0% 0%; }
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 1024px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      .container {
+        padding: 2.5rem;
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: var(--border-radius);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transform: translateY(0);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+        height: fit-content;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      }
+      
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+        padding-top: 1rem;
+        grid-column: 1 / -1;
+      }
+
+      .header::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--gradient-accent);
+        margin: 1.5rem auto;
+        border-radius: 2px;
+        animation: scaleIn 0.8s ease-out;
+      }
+      
+      .header h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+        position: relative;
+        animation: fadeInDown 0.8s ease-out;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        color: #64748b;
+        max-width: 600px;
+        margin: 0 auto;
+        animation: fadeIn 1s ease-out 0.2s both;
+      }
+      
+      /* Form Section */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        animation: fadeInUp 0.8s ease-out 0.3s both;
+      }
+
+      .form-group {
+        position: relative;
+      }
+
+      label {
+        font-weight: 600;
+        color: #334155;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: all var(--transition-speed) ease;
+      }
+
+      .form-group:hover label {
+        color: var(--primary-color);
+        transform: translateX(3px);
+      }
+
+      input[type="file"] {
+        width: 100%;
+        padding: 1rem;
+        border: 2px dashed #cbd5e1;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        background-color: #f8fafc;
+        transition: all var(--transition-speed) ease;
+      }
+
+      input[type="file"]:hover, 
+      input[type="file"]:focus {
+        border-color: var(--primary-color);
+        background-color: rgba(67, 97, 238, 0.05);
+      }
+
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 1rem 1.2rem;
+        border: 1px solid #e2e8f0;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        background-color: #f8fafc;
+        transition: all var(--transition-speed) ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      }
+
+      input[type="text"]:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        transform: translateY(-2px);
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        background: var(--gradient);
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      button[type="submit"]:hover {
+        background: var(--gradient-accent);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+      }
+
+      button[type="submit"]:active {
+        transform: translateY(1px);
+      }
+
+      button[type="submit"]::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255, 255, 255, 0.3),
+          rgba(255, 255, 255, 0.1)
+        );
+        transform: rotate(30deg);
+        transition: all 0.6s ease;
+      }
+
+      button[type="submit"]:hover::after {
+        left: 100%;
+      }
+
+      /* Loading Bar */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .loading-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .loading-container {
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .loading-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .loading-bar {
+        height: 8px;
+        width: 100%;
+        background: #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+
+      .loading-progress {
+        height: 100%;
+        width: 0;
+        border-radius: 10px;
+        background: var(--gradient-accent);
+        position: relative;
+        transition: width 0.3s ease;
+      }
+
+      .loading-progress::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      .loading-dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+        gap: 0.5rem;
+      }
+
+      .loading-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        opacity: 0.3;
+        animation: pulse 1.5s infinite ease-in-out;
+      }
+
+      .loading-dot:nth-child(1) { animation-delay: 0s; }
+      .loading-dot:nth-child(2) { animation-delay: 0.3s; }
+      .loading-dot:nth-child(3) { animation-delay: 0.6s; }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.3); opacity: 1; }
+      }
+
+      .loading-percentage {
+        margin-top: 1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+      }
+
+      /* Result Display */
+      .result-container {
+        background: linear-gradient(to bottom right, #f1f5f9, #ffffff);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: 
+          inset 0 1px 3px rgba(0,0,0,0.05),
+          0 5px 15px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.05);
+        animation: fadeIn 0.8s ease-out;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .result-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .result-container h4 {
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        margin: 0;
+      }
+
+      .result-container h4 i {
+        margin-right: 0.5rem;
+        color: var(--accent-color);
+      }
+
+      .copy-all-btn {
+        background: var(--gradient);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all var(--transition-speed) ease;
+        box-shadow: 0 2px 10px rgba(67, 97, 238, 0.2);
+      }
+
+      .copy-all-btn:hover {
+        background: var(--gradient-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      .copy-all-btn:active {
+        transform: translateY(0);
+      }
+
+      .copy-all-btn i {
+        font-size: 0.9rem;
+      }
+
+      .result-content {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+      }
+
+      .result-content::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .result-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      .result-content::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 10px;
+      }
+
+      .result-container p {
+        white-space: pre-wrap;
+        font-size: 1.05rem;
+        color: #334155;
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+        padding: 1rem;
+        background: white;
+        border-radius: 8px;
+        border-left: 4px solid var(--primary-color);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      /* Engagement Score */
+      .engagement-container {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border-left: 4px solid var(--accent-color);
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      .engagement-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .engagement-header h4 {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .engagement-header i {
+        margin-right: 0.5rem;
+      }
+
+      .engagement-score {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-align: center;
+        margin: 1rem 0;
+      }
+
+      .engagement-message {
+        color: #64748b;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      .regenerate-btn {
+        display: block;
+        width: 100%;
+        padding: 0.8rem;
+        margin-top: 1rem;
+        background: var(--gradient-accent);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-weight: 600;
+        transition: all var(--transition-speed) ease;
+        box-shadow: 0 2px 10px rgba(247, 37, 133, 0.2);
+      }
+
+      .regenerate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+      }
+
+      .regenerate-btn:active {
+        transform: translateY(0);
+      }
+
+      /* Success notification */
+      .copy-notification {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--gradient);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 1000;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+
+      .copy-notification.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* Error Message */
+      .error-message {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        color: #dc2626;
+        font-size: 0.95rem;
+        text-align: center;
+        background: rgba(220, 38, 38, 0.1);
+        border-radius: var(--border-radius);
+        border-left: 4px solid #dc2626;
+        animation: shake 0.5s ease-in-out;
+      }
+
+      /* Floating animation for decorative elements */
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+      }
+
+      @keyframes scaleIn {
+        0% { transform: scaleX(0); opacity: 0; }
+        100% { transform: scaleX(1); opacity: 1; }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+        }
+        
+        .header h1 {
+          font-size: 2.2rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        body {
+          padding: 1rem;
+        }
+        
+        .header h1 {
+          font-size: 1.8rem;
+        }
+        
+        .header p {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <h4>Nova<span>souk</span></h4>
+              </a>
+              <!-- ***** Logo End ***** -->
+
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="index" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="index">About Us</a></li>
+                <li class="scroll-to-section"><a href="index">Portfolio</a></li>
+                <li class="scroll-to-section"><a href="index">Message Us</a></li>
+                <li class="scroll-to-section">
+                  <div class="main-red-button">
+                    <a href="index">Contact Now</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+<br><br><br><br><br><br>
+  <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loading-container">
+        <div class="loading-title">MarketMind AI is generating your content</div>
+        <div class="loading-bar">
+          <div class="loading-progress" id="loading-progress"></div>
+        </div>
+        <div class="loading-percentage" id="loading-percentage">0%</div>
+        <div class="loading-dots">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <!-- Header -->
+      <header class="header animate__animated animate__fadeIn">
+        <h1>MarketMind AI</h1>
+        <p>Your AI-powered ad text generator with engagement prediction</p>
+      </header>
+
+      <!-- Form Column -->
+      <div class="container animate__animated animate__fadeInLeft">
+        <form id="generation-form" action="{{ url_for('text_generation_with_engagement') }}" method="POST" enctype="multipart/form-data" novalidate>
+          <div class="form-group">
+            <label for="pdf_file"><i class="fas fa-file-pdf"></i> Upload Company PDF Profile:</label>
+            <input type="file" name="pdf_file" id="pdf_file" accept=".pdf" required />
+          </div>
+          
+
+          <div class="form-group">
+            <label for="product_idea"><i class="fas fa-lightbulb"></i> Enter your product idea:</label>
+            <input
+              type="text"
+              name="product_idea"
+              id="product_idea"
+              placeholder="Enter your product idea"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="motif"><i class="fas fa-palette"></i> Choose a creative concept:</label>
+            <select name="motif" id="motif" required>
+              <option value="" disabled selected>Select a motif</option>
+              <option value="elegance">Elegance</option>
+              <option value="excitement">Excitement</option>
+              <option value="trust">Trust</option>
+              <option value="innovation">Innovation</option>
+              <option value="freedom">Freedom</option>
+              <option value="adventure">Adventure</option>
+              <option value="quality">Quality</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="platform"><i class="fas fa-share-alt"></i> Choose a platform:</label>
+            <select name="platform" id="platform" required>
+              <option value="" disabled selected>Select a platform</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Instagram">Instagram</option>
+              <option value="TikTok">TikTok</option>
+              <option value="LinkedIn">LinkedIn</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="language"><i class="fas fa-language"></i> Choose the language of the generated ad:</label>
+            <select name="language" id="language" required>
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+            </select>
+          </div>
+
+          <button type="submit" class="animate__animated animate__pulse animate__infinite animate__slower">
+            <i class="fas fa-magic"></i> Generate
+          </button>
+        </form>
+
+        {% if error_message %}
+        <div class="error-message animate__animated animate__shakeX">
+          <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Results Column -->
+      <div class="container animate__animated animate__fadeInRight">
+        {% if headline or ad_text %}
+        <div class="result-container">
+          <div class="result-header">
+            <h4><i class="fas fa-scroll"></i> Generated Content</h4>
+            <button class="copy-all-btn" id="copy-all-btn">
+              <i class="fas fa-copy"></i> Copy All
+            </button>
+          </div>
+          
+          <div class="result-content">
+            {% if headline %}
+              <h4><i class="fas fa-heading"></i> Headline:</h4>
+              <p>{{ headline }}</p>
+            {% endif %}
+            {% if ad_text %}
+              <h4><i class="fas fa-align-left"></i> Ad Text:</h4>
+              <p>{{ ad_text }}</p>
+            {% endif %}
+          </div>
+
+          <!-- Engagement Prediction Section -->
+          {% if engagement_score is not none %}
+          <div class="engagement-container">
+            <div class="engagement-header">
+              <h4><i class="fas fa-chart-line"></i> Engagement Prediction</h4>
+            </div>
+            <div class="engagement-score">
+              {{ engagement_score }}%
+            </div>
+            <div class="engagement-message">
+              Predicted engagement rate for this content
+            </div>
+            <button class="regenerate-btn" id="regenerate-btn">
+              <i class="fas fa-sync-alt"></i> Regenerate
+            </button>
+          </div>
+          {% endif %}
+        </div>
+        {% else %}
+        <div class="result-container" style="display: flex; align-items: center; justify-content: center;">
+          <div style="text-align: center; padding: 2rem;">
+            <i class="fas fa-robot" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem;"></i>
+            <h3 style="color: #64748b;">Your generated content will appear here</h3>
+            <p style="color: #94a3b8;">Fill out the form and click "Generate" to create amazing ad copies</p>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Copy Notification -->
+    <div class="copy-notification" id="copy-notification">
+      <i class="fas fa-check-circle"></i>
+      <span>Content copied to clipboard!</span>
+    </div>
+
+    <script>
+      // Add animation to form elements on focus
+      document.querySelectorAll('input, select').forEach(element => {
+        element.addEventListener('focus', () => {
+          element.style.transform = 'translateY(-2px)';
+          element.style.boxShadow = '0 5px 15px rgba(67, 97, 238, 0.1)';
+        });
+        
+        element.addEventListener('blur', () => {
+          element.style.transform = '';
+          element.style.boxShadow = '';
+        });
+      });
+
+      // Add pulse animation to button when form is valid
+      const form = document.getElementById('generation-form');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const loadingOverlay = document.getElementById('loading-overlay');
+      const loadingProgress = document.getElementById('loading-progress');
+      const loadingPercentage = document.getElementById('loading-percentage');
+      
+      form.addEventListener('input', () => {
+        if(form.checkValidity()) {
+          submitBtn.classList.add('animate__pulse');
+        } else {
+          submitBtn.classList.remove('animate__pulse');
+        }
+      });
+
+      // Form submission with improved loading animation
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Show loading overlay
+        loadingOverlay.classList.add('active');
+        let progress = 0;
+        
+        // Initial fast progress (0-50%)
+        const initialInterval = setInterval(() => {
+          progress += Math.random() * 5;
+          if (progress >= 50) {
+            clearInterval(initialInterval);
+            startSlowerProgress();
+          }
+          updateProgress(progress);
+        }, 150);
+
+        function startSlowerProgress() {
+          // Slower progress (50-85%)
+          const middleInterval = setInterval(() => {
+            progress += Math.random() * 2;
+            if (progress >= 85) {
+              clearInterval(middleInterval);
+              startFinalProgress();
+            }
+            updateProgress(progress);
+          }, 300);
+        }
+
+        function startFinalProgress() {
+          // Very slow progress (85-100%) - waits for actual completion
+          const finalInterval = setInterval(() => {
+            progress += Math.random();
+            if (progress >= 100) {
+              progress = 100;
+              clearInterval(finalInterval);
+            }
+            updateProgress(progress);
+          }, 500);
+        }
+
+        function updateProgress(value) {
+          loadingProgress.style.width = `${value}%`;
+          loadingPercentage.textContent = `${Math.round(value)}%`;
+        }
+
+        try {
+          // Create FormData object
+          const formData = new FormData(form);
+          
+          // Send the actual request
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+          });
+          
+          // When we get the response, complete the progress
+          if (response.ok) {
+            updateProgress(100);
+            setTimeout(() => {
+              // Submit the form normally to show results
+              form.submit();
+            }, 500);
+          } else {
+            handleError();
+          }
+        } catch (error) {
+          handleError();
+        }
+
+        function handleError() {
+          loadingOverlay.classList.remove('active');
+          // Show error message or handle as needed
+          alert('An error occurred. Please try again.');
+        }
+      });
+
+      // Regenerate button functionality
+      document.getElementById('regenerate-btn')?.addEventListener('click', function() {
+        // Show loading overlay
+        loadingOverlay.classList.add('active');
+        let progress = 0;
+        
+        // Simulate progress
+        const progressInterval = setInterval(() => {
+          progress += Math.random() * 10;
+          if (progress >= 100) {
+            clearInterval(progressInterval);
+            // Submit the form again
+            document.getElementById('generation-form').submit();
+          }
+          loadingProgress.style.width = `${progress}%`;
+          loadingPercentage.textContent = `${Math.round(progress)}%`;
+        }, 200);
+      });
+
+      // Copy All functionality
+      document.getElementById('copy-all-btn')?.addEventListener('click', () => {
+        let contentToCopy = '';
+        
+        // Get all result paragraphs
+        const resultParagraphs = document.querySelectorAll('.result-content p');
+        resultParagraphs.forEach(p => {
+          contentToCopy += p.textContent + '\n\n';
+        });
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(contentToCopy.trim()).then(() => {
+          // Show notification
+          const notification = document.getElementById('copy-notification');
+          notification.classList.add('show');
+          
+          // Hide after 3 seconds
+          setTimeout(() => {
+            notification.classList.remove('show');
+          }, 3000);
+        });
+      });
+
+      // Animate results when they appear
+      if(document.querySelector('.result-content p')) {
+        const paragraphs = document.querySelectorAll('.result-content p');
+        paragraphs.forEach((p, index) => {
+          p.style.animationDelay = `${index * 0.1}s`;
+        });
+      }
+    </script>
+  </body>
+</html>

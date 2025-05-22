@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MarketMind - AI Brand Identity Generator</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap core CSS (via dossier static) -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <!-- Additional CSS Files (via dossier static) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-space-dynamic.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animated.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}" />
+
+    <!-- TemplateMo 562 Space Dynamic -->
+    <link rel="stylesheet" href="https://templatemo.com/tm-562-space-dynamic" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #f72585;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        --gradient-accent: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        --transition-speed: 0.4s;
+        --border-radius: 16px;
+      }
+      
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8fafc;
+        color: var(--dark-color);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+        background-image: 
+          radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.08) 0%, transparent 25%),
+          radial-gradient(circle at 90% 80%, rgba(247, 37, 133, 0.08) 0%, transparent 25%);
+        animation: gradientShift 20s ease infinite;
+        background-size: 200% 200%;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }
+        100% { background-position: 0% 0%; }
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 1024px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      .container {
+        padding: 2.5rem;
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: var(--border-radius);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transform: translateY(0);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+        height: fit-content;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      }
+      
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+        padding-top: 1rem;
+        grid-column: 1 / -1;
+      }
+
+      .header::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--gradient-accent);
+        margin: 1.5rem auto;
+        border-radius: 2px;
+        animation: scaleIn 0.8s ease-out;
+      }
+      
+      .header h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+        position: relative;
+        animation: fadeInDown 0.8s ease-out;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        color: #64748b;
+        max-width: 600px;
+        margin: 0 auto;
+        animation: fadeIn 1s ease-out 0.2s both;
+      }
+      
+      /* Form Section */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        animation: fadeInUp 0.8s ease-out 0.3s both;
+      }
+
+      .form-group {
+        position: relative;
+      }
+
+      label {
+        font-weight: 600;
+        color: #334155;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: all var(--transition-speed) ease;
+      }
+
+      .form-group:hover label {
+        color: var(--primary-color);
+        transform: translateX(3px);
+      }
+
+      input[type="text"],
+      input[type="color"],
+      input[type="file"],
+      select {
+        width: 100%;
+        padding: 1rem 1.2rem;
+        border: 1px solid #e2e8f0;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        background-color: #f8fafc;
+        transition: all var(--transition-speed) ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      }
+
+      input[type="text"]:focus,
+      input[type="color"]:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        transform: translateY(-2px);
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        background: var(--gradient);
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      button[type="submit"]:hover {
+        background: var(--gradient-accent);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+      }
+
+      button[type="submit"]:active {
+        transform: translateY(1px);
+      }
+
+      button[type="submit"]::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255, 255, 255, 0.3),
+          rgba(255, 255, 255, 0.1)
+        );
+        transform: rotate(30deg);
+        transition: all 0.6s ease;
+      }
+
+      button[type="submit"]:hover::after {
+        left: 100%;
+      }
+
+      /* Loading Bar */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .loading-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .loading-container {
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .loading-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .loading-bar {
+        height: 8px;
+        width: 100%;
+        background: #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+
+      .loading-progress {
+        height: 100%;
+        width: 0;
+        border-radius: 10px;
+        background: var(--gradient-accent);
+        position: relative;
+        transition: width 0.3s ease;
+      }
+
+      .loading-progress::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      .loading-dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+        gap: 0.5rem;
+      }
+
+      .loading-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        opacity: 0.3;
+        animation: pulse 1.5s infinite ease-in-out;
+      }
+
+      .loading-dot:nth-child(1) { animation-delay: 0s; }
+      .loading-dot:nth-child(2) { animation-delay: 0.3s; }
+      .loading-dot:nth-child(3) { animation-delay: 0.6s; }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.3); opacity: 1; }
+      }
+
+      .loading-percentage {
+        margin-top: 1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+      }
+
+      /* Result Display */
+      .result-container {
+        background: linear-gradient(to bottom right, #f1f5f9, #ffffff);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: 
+          inset 0 1px 3px rgba(0,0,0,0.05),
+          0 5px 15px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.05);
+        animation: fadeIn 0.8s ease-out;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .result-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .result-container h4 {
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        margin: 0;
+      }
+
+      .result-container h4 i {
+        margin-right: 0.5rem;
+        color: var(--accent-color);
+      }
+
+      .download-btn {
+        background: var(--gradient);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all var(--transition-speed) ease;
+        box-shadow: 0 2px 10px rgba(67, 97, 238, 0.2);
+        text-decoration: none;
+      }
+
+      .download-btn:hover {
+        background: var(--gradient-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      .download-btn:active {
+        transform: translateY(0);
+      }
+
+      .download-btn i {
+        font-size: 0.9rem;
+      }
+
+      .result-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .generated-image {
+        max-width: 100%;
+        max-height: 500px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.5s ease;
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      .generated-image:hover {
+        transform: scale(1.02);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      }
+
+      /* Gallery Grid */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .gallery-item {
+        background: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .gallery-item-content {
+        padding: 1rem;
+      }
+
+      .gallery-item h4 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .gallery-item p {
+        color: #64748b;
+        font-size: 0.9rem;
+        font-style: italic;
+      }
+
+      /* Success notification */
+      .notification {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--gradient);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 1000;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+
+      .notification.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* Error Message */
+      .error-message {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        color: #dc2626;
+        font-size: 0.95rem;
+        text-align: center;
+        background: rgba(220, 38, 38, 0.1);
+        border-radius: var(--border-radius);
+        border-left: 4px solid #dc2626;
+        animation: shake 0.5s ease-in-out;
+      }
+
+      /* Floating animation for decorative elements */
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+      }
+
+      @keyframes scaleIn {
+        0% { transform: scaleX(0); opacity: 0; }
+        100% { transform: scaleX(1); opacity: 1; }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+        }
+        
+        .header h1 {
+          font-size: 2.2rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        body {
+          padding: 1rem;
+        }
+        
+        .header h1 {
+          font-size: 1.8rem;
+        }
+        
+        .header p {
+          font-size: 1rem;
+        }
+        
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <h4>Nova<span>souk</span></h4>
+              </a>
+              <!-- ***** Logo End ***** -->
+
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="index" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="index">About Us</a></li>
+                <li class="scroll-to-section"><a href="index">Portfolio</a></li>
+                <li class="scroll-to-section"><a href="index">Message Us</a></li>
+                <li class="scroll-to-section">
+                  <div class="main-red-button">
+                    <a href="index">Contact Now</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+<br><br><br><br><br><br>
+
+ <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <h4>Nova<span>souk</span></h4>
+              </a>
+              <!-- ***** Logo End ***** -->
+
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="index" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="index">About Us</a></li>
+                <li class="scroll-to-section"><a href="index">Portfolio</a></li>
+                <li class="scroll-to-section"><a href="index">Message Us</a></li>
+                <li class="scroll-to-section">
+                  <div class="main-red-button">
+                    <a href="index">Contact Now</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header> 
+    <br><br><br><br>
+  <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loading-container">
+        <div class="loading-title">MarketMind AI is generating your brand identity</div>
+        <div class="loading-bar">
+          <div class="loading-progress" id="loading-progress"></div>
+        </div>
+        <div class="loading-percentage" id="loading-percentage">0%</div>
+        <div class="loading-dots">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <!-- Header -->
+      <header class="header animate__animated animate__fadeIn">
+        <h1>Brand Identity Generator</h1>
+        <p>Create a complete brand identity with colors, logos, and marketing materials</p>
+      </header>
+
+      <!-- Form Column -->
+      <div class="container animate__animated animate__fadeInLeft">
+        <form id="generation-form" action="/generate_charte_bulk" method="POST" enctype="multipart/form-data" novalidate>
+          <div class="form-group">
+            <label for="brand_name"><i class="fas fa-tag"></i> Brand Name:</label>
+            <input
+              type="text"
+              name="brand_name"
+              id="brand_name"
+              placeholder="Enter your brand name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="main_color"><i class="fas fa-palette"></i> Main Brand Color:</label>
+            <input
+              type="color"
+              name="main_color"
+              id="main_color"
+              value="#002244"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="other_colors"><i class="fas fa-palette"></i> Secondary Colors (comma separated):</label>
+            <input
+              type="text"
+              name="other_colors"
+              id="other_colors"
+              placeholder="#FFFFFF, #CCCCCC"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="style_keywords"><i class="fas fa-brush"></i> Style Keywords:</label>
+            <input
+              type="text"
+              name="style_keywords"
+              id="style_keywords"
+              placeholder="minimaliste & tunisien"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="slogan"><i class="fas fa-quote-left"></i> Slogan:</label>
+            <input
+              type="text"
+              name="slogan"
+              id="slogan"
+              placeholder="Enter your brand slogan"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="logo"><i class="fas fa-image"></i> Logo (optional):</label>
+            <input
+              type="file"
+              name="logo"
+              id="logo"
+              accept="image/*"
+            />
+          </div>
+
+          <button type="submit" class="animate__animated animate__pulse animate__infinite animate__slower">
+            <i class="fas fa-magic"></i> Generate Brand Identity
+          </button>
+        </form>
+
+        {% if error_message %}
+        <div class="error-message animate__animated animate__shakeX">
+          <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Results Column -->
+      <div class="container animate__animated animate__fadeInRight">
+        {% if images %}
+        <div class="result-container">
+          <div class="result-header">
+            <h4><i class="fas fa-images"></i> Generated Brand Identity</h4>
+          </div>
+          
+          <div class="result-content">
+            <div class="gallery-grid">
+              {% for img in images %}
+                <div class="gallery-item">
+                  <img src="{{ url_for('static', filename='generated/' + img.filename) }}" alt="{{ img.title }}">
+                  <div class="gallery-item-content">
+                    <h4>{{ img.title }}</h4>
+                    <p><i>{{ img.prompt }}</i></p>
+                    <a href="{{ url_for('static', filename='generated/' + img.filename) }}" download class="download-btn">
+                      <i class="fas fa-download"></i> Download
+                    </a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="result-container" style="display: flex; align-items: center; justify-content: center;">
+          <div style="text-align: center; padding: 2rem;">
+            <i class="fas fa-image" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem;"></i>
+            <h3 style="color: #64748b;">Your brand identity will appear here</h3>
+            <p style="color: #94a3b8;">Fill out the form and click "Generate Brand Identity" to create your complete brand package</p>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+      <i class="fas fa-check-circle"></i>
+      <span id="notification-message">Action completed successfully!</span>
+    </div>
+
+    <script>
+      // Add animation to form elements on focus
+      document.querySelectorAll('input, select').forEach(element => {
+        element.addEventListener('focus', () => {
+          element.style.transform = 'translateY(-2px)';
+          element.style.boxShadow = '0 5px 15px rgba(67, 97, 238, 0.1)';
+        });
+        
+        element.addEventListener('blur', () => {
+          element.style.transform = '';
+          element.style.boxShadow = '';
+        });
+      });
+
+      // Add pulse animation to button when form is valid
+      const form = document.getElementById('generation-form');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const loadingOverlay = document.getElementById('loading-overlay');
+      const loadingProgress = document.getElementById('loading-progress');
+      const loadingPercentage = document.getElementById('loading-percentage');
+      
+      form.addEventListener('input', () => {
+        if(form.checkValidity()) {
+          submitBtn.classList.add('animate__pulse');
+        } else {
+          submitBtn.classList.remove('animate__pulse');
+        }
+      });
+
+      // Form submission with improved loading animation
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Show loading overlay
+        loadingOverlay.classList.add('active');
+        let progress = 0;
+        
+        // Initial fast progress (0-50%)
+        const initialInterval = setInterval(() => {
+          progress += Math.random() * 5;
+          if (progress >= 50) {
+            clearInterval(initialInterval);
+            startSlowerProgress();
+          }
+          updateProgress(progress);
+        }, 150);
+
+        function startSlowerProgress() {
+          // Slower progress (50-85%)
+          const middleInterval = setInterval(() => {
+            progress += Math.random() * 2;
+            if (progress >= 85) {
+              clearInterval(middleInterval);
+              startFinalProgress();
+            }
+            updateProgress(progress);
+          }, 300);
+        }
+
+        function startFinalProgress() {
+          // Very slow progress (85-100%) - waits for actual completion
+          const finalInterval = setInterval(() => {
+            progress += Math.random();
+            if (progress >= 100) {
+              progress = 100;
+              clearInterval(finalInterval);
+            }
+            updateProgress(progress);
+          }, 500);
+        }
+
+        function updateProgress(value) {
+          loadingProgress.style.width = `${value}%`;
+          loadingPercentage.textContent = `${Math.round(value)}%`;
+        }
+
+        try {
+          // Create FormData object
+          const formData = new FormData(form);
+          
+          // Send the actual request
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+          });
+          
+          // When we get the response, complete the progress
+          if (response.ok) {
+            updateProgress(100);
+            setTimeout(() => {
+              // Submit the form normally to show results
+              form.submit();
+            }, 500);
+          } else {
+            handleError();
+          }
+        } catch (error) {
+          handleError();
+        }
+
+        function handleError() {
+          loadingOverlay.classList.remove('active');
+          // Show error message or handle as needed
+          showNotification('An error occurred. Please try again.', 'error');
+        }
+      });
+
+      // Show notification function
+      function showNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notification-message');
+        
+        notificationMessage.textContent = message;
+        
+        // Change color based on type
+        if (type === 'error') {
+          notification.style.background = 'linear-gradient(135deg, #dc2626, #b91c1c)';
+        } else {
+          notification.style.background = 'var(--gradient)';
+        }
+        
+        notification.classList.add('show');
+        
+        // Hide after 3 seconds
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+
+      // Animate images when they appear
+      if(document.querySelector('.gallery-item')) {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach((item, index) => {
+          item.style.animationDelay = `${index * 0.1}s`;
+        });
+      }
+    </script>
+  </body>
+</html>

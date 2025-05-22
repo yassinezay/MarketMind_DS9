@@ -10,7 +10,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import PeftModel
 
 # --- Step 2: Set HuggingFace Token
-os.environ["HF_TOKEN"] = "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"
+os.environ["HF_TOKEN"] = "Api-Token-Here"  # Replace with your Hugging Face token
 
 # --- Step 3: Define Model Paths
 finetuned_model_path = "/content/drive/MyDrive/finetuned-llama3-products"

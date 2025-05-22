@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Plan Features</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts (pas besoin de changer) -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap core CSS (via dossier static) -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <!-- Additional CSS Files (via dossier static) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-space-dynamic.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animated.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}" />
+
+    <!-- TemplateMo 562 Space Dynamic -->
+    <link rel="stylesheet" href="https://templatemo.com/tm-562-space-dynamic" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Global Styles */
+    :root {
+      --primary-color: #d10000;
+      --secondary-color: #f8f9fa;
+      --accent-color: #4361ee;
+      --text-color: #333;
+      --light-text: #6c757d;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Section */
+    .free-header {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 60px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .free-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.5)"/></svg>');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      opacity: 0.5;
+    }
+    
+    .free-header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      position: relative;
+      color: var(--primary-color);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .free-header p {
+      font-size: 1.2rem;
+      color: var(--light-text);
+      max-width: 700px;
+      margin: 0 auto 30px;
+      position: relative;
+    }
+    
+    .free-badge {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 8px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(209, 0, 0, 0.2);
+      position: relative;
+      animation: pulse 2s infinite;
+    }
+    
+    /* Features Grid */
+    .features-grid {
+      padding: 80px 0;
+    }
+    
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .col-lg-3.col-sm-6 {
+      flex: 0 0 calc(50% - 30px);
+      max-width: calc(50% - 30px);
+    }
+    
+    @media (min-width: 992px) {
+      .col-lg-3.col-sm-6 {
+        flex: 0 0 calc(25% - 30px);
+        max-width: calc(25% - 30px);
+      }
+    }
+    
+    .item {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      height: 300px;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .showed-content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      transition: all 0.4s ease;
+    }
+    
+    .showed-content img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: all 0.4s ease;
+    }
+    
+    .item:hover .showed-content img {
+      transform: scale(1.1);
+    }
+    
+    .hidden-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: all 0.4s ease;
+      opacity: 0;
+    }
+    
+    .item:hover .hidden-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .hidden-content h4 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: white;
+    }
+    
+    .hidden-content p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    /* Free Limitations Section */
+    .limitations {
+      background-color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+    
+    .limitations h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: var(--primary-color);
+    }
+    
+    .limitation-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .limitation-card {
+      background: #fff5f5;
+      border-radius: 10px;
+      padding: 25px;
+      flex: 0 0 calc(33.333% - 20px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .limitation-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .limitation-card i {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    
+    .limitation-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    
+    .limitation-card p {
+      color: var(--light-text);
+    }
+    
+    /* Upgrade CTA */
+    .upgrade-cta {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 60px 0;
+      text-align: center;
+    }
+    
+    .upgrade-cta h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .upgrade-cta p {
+      font-size: 1.1rem;
+      color: var(--light-text);
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: var(--primary-color);
+      color: white;
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(209, 0, 0, 0.3);
+    }
+    
+    .cta-button:hover {
+      background: #a00000;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(209, 0, 0, 0.4);
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .wow {
+      visibility: hidden;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .col-lg-3.col-sm-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      
+      .free-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .limitation-card {
+        flex: 0 0 100%;
+      }
+    }
+  </style>
+</head>
+<!-- ***** Header Area Start ***** -->
+<br><br><br><br>
+    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <h4>Nova<span>souk</span></h4>
+              </a>
+              <!-- ***** Logo End ***** -->
+
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="index" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="index">About Us</a></li>
+                <li class="scroll-to-section"><a href="index">Portfolio</a></li>
+                <li class="scroll-to-section"><a href="index">Message Us</a></li>
+                <li class="scroll-to-section">
+                  <div class="main-red-button">
+                    <a href="index">Contact Now</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+<body>
+  <!-- Header Section -->
+  <section class="free-header">
+    <div class="container">
+      <span class="free-badge animate__animated animate__pulse animate__infinite">Free Plan</span>
+      <h1 class="animate__animated animate__fadeInDown">Explore Our Free Features</h1>
+      <p class="animate__animated animate__fadeInUp">Get started with these powerful tools at no cost. Upgrade anytime to unlock more capabilities.</p>
+    </div>
+  </section>
+
+  <!-- Features Grid Section -->
+  <section class="features-grid">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6">
+          <a href="{{ url_for('text_generation') }}">
+            <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+              <div class="hidden-content">
+                <h4>Text Generation</h4>
+                <p>Generate high-quality text content from your ideas and prompts</p>
+              </div>
+              <div class="showed-content">
+                <img src="{{ url_for('static', filename='assets/images/2921747.png') }}" alt="Text Generation" />
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="col-lg-3 col-sm-6">
+          <a href="{{ url_for('image_generation') }}">
+            <div class="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.4s">
+              <div class="hidden-content">
+                <h4>Image Generation</h4>
+                <p>Create stunning visuals based on your descriptions</p>
+              </div>
+              <div class="showed-content">
+                <img src="{{ url_for('static', filename='assets/images/image-gallery.png') }}" alt="Image Generation" />
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Limitations Section -->
+  <section class="limitations">
+    <div class="container">
+      <h2 class="wow fadeIn">Free Plan Limitations</h2>
+      <div class="limitation-cards">
+        <div class="limitation-card wow fadeInUp" data-wow-delay="0.2s">
+          <i class="fas fa-volume-mute"></i>
+          <h3>No Audio Generation</h3>
+          <p>Upgrade to create audio content from text</p>
+        </div>
+        
+        <div class="limitation-card wow fadeInUp" data-wow-delay="0.4s">
+          <i class="fas fa-video-slash"></i>
+          <h3>No Video Generation</h3>
+          <p>Premium feature unavailable in free plan</p>
+        </div>
+        
+        <div class="limitation-card wow fadeInUp" data-wow-delay="0.6s">
+          <i class="fas fa-chart-bar"></i>
+          <h3>Basic Analytics</h3>
+          <p>Limited insights into your content performance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upgrade CTA Section -->
+  <section class="upgrade-cta">
+    <div class="container">
+      <h2 class="wow fadeIn">Ready for More Power?</h2>
+      <p class="wow fadeIn" data-wow-delay="0.2s">Upgrade to Premium or Ultimate plan to unlock all features and remove limitations</p>
+      <a href="#pricing" class="cta-button wow fadeInUp" data-wow-delay="0.4s">View Upgrade Options</a>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script>
+    new WOW().init();
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

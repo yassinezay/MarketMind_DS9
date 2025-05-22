@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Recognition Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #3f37c9;
+      --success: #4cc9f0;
+      --white: #ffffff;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--white);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .background-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(67, 97, 238, 0.1);
+    }
+
+    .shape:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      left: -100px;
+    }
+
+    .shape:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      bottom: -50px;
+      right: -50px;
+    }
+
+    .shape:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 30%;
+      right: 10%;
+    }
+
+    .shape:nth-child(4) {
+      width: 100px;
+      height: 100px;
+      bottom: 20%;
+      left: 10%;
+    }
+
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .face-recognition-container {
+      width: 100%;
+      max-width: 500px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      margin: 20px;
+    }
+
+    .face-recognition-container:hover {
+      border-color: rgba(67, 97, 238, 0.5);
+      box-shadow: 0 10px 25px rgba(67, 97, 238, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .face-recognition-header {
+      margin-bottom: 30px;
+    }
+
+    .face-recognition-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: rgba(67, 97, 238, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--primary);
+    }
+
+    .face-recognition-title {
+      color: var(--white);
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .face-recognition-subtitle {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+
+    .input-with-icon {
+      position: relative;
+      width: 100%;
+      margin-bottom: 25px;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 18px;
+    }
+
+    .face-name-input {
+      width: 100%;
+      padding: 16px 16px 16px 50px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .face-name-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    }
+
+    .camera-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 300px;
+      margin: 0 auto 25px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .camera-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .camera-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .face-outline {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 70%;
+      border: 3px dashed rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: pulseOutline 2s infinite;
+    }
+
+    .scanning-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      animation: scanning 3s linear infinite;
+      opacity: 0.8;
+    }
+
+    .camera-status {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px 15px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulseStatus 2s infinite;
+    }
+
+    .face-capture-btn {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 0;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.4s ease;
+      overflow: hidden;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+    }
+
+    .face-capture-btn .btn-content {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 30px;
+      z-index: 2;
+    }
+
+    .face-capture-btn .btn-shine {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .face-capture-btn:hover .btn-shine {
+      left: 100%;
+    }
+
+    .face-capture-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.5);
+    }
+
+    .face-capture-btn:active {
+      transform: translateY(1px);
+    }
+
+    .face-message {
+      margin: 20px auto 0;
+      min-height: 24px;
+      color: var(--white);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      max-width: 300px;
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .face-recognition-info {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .back-to-login {
+      margin-top: 30px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+    }
+
+    .back-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    @keyframes pulseOutline {
+      0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.95); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.95); }
+    }
+
+    @keyframes scanning {
+      0% { top: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    @keyframes pulseStatus {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background elements -->
+  <div class="background-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <div class="particles" id="particles-js"></div>
+
+  <div class="face-recognition-container">
+    <div class="face-recognition-header">
+      <div class="face-recognition-icon">
+        <i class="fas fa-face-recognition"></i>
+      </div>
+      <h1 class="face-recognition-title">Face Recognition Login</h1>
+      <p class="face-recognition-subtitle">Quick and secure access</p>
+    </div>
+    
+    <div class="input-with-icon">
+      <i class="fas fa-user-tag"></i>
+      <input type="text" id="face-name" placeholder="Enter your name" class="face-name-input" />
+    </div>
+    
+    <div class="camera-container">
+      <video id="video" width="400" height="300" autoplay muted playsinline></video>
+      <div class="camera-overlay">
+        <div class="face-outline"></div>
+        <div class="scanning-animation"></div>
+      </div>
+      <div class="camera-status">
+        <div class="status-dot"></div>
+        <span>Camera active</span>
+      </div>
+    </div>
+    
+    <button id="capture-btn" class="face-capture-btn">
+      <span class="btn-content">
+        <span class="btn-icon-left">
+          <i class="fas fa-camera"></i>
+        </span>
+      <a href="index" class="btn-text">Capture & Login</a>
+
+        <span class="btn-icon-right">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+      </span>
+      <span class="btn-shine"></span>
+    </button>
+    
+    <div id="face-login-message" class="face-message"></div>
+    
+    <div class="face-recognition-info">
+      <i class="fas fa-lightbulb"></i>
+      <span>For best results, position your face in the circle</span>
+    </div>
+
+    <p class="back-to-login">Prefer traditional login? <a href="/login" class="back-link">Go back to login page</a></p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create floating particles
+      const particlesContainer = document.getElementById('particles-js');
+      const particleCount = 30;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 5 + 1;
+        const posX = Math.random() * window.innerWidth;
+        const duration = Math.random() * 15 + 10;
+        const delay = Math.random() * -20;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}px`;
+        particle.style.bottom = '0px';
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        particlesContainer.appendChild(particle);
+      }
+
+      // Start webcam
+      startWebcam();
+
+      // Capture button event
+      document.getElementById('capture-btn').addEventListener('click', async () => {
+        const video = document.getElementById('video');
+        const nameInput = document.getElementById('face-name');
+        const name = nameInput.value.trim();
+        const messageEl = document.getElementById('face-login-message');
+
+        if (!name) {
+          messageEl.textContent = "Please enter your name.";
+          messageEl.style.background = "rgba(255, 107, 107, 0.1)";
+          return;
+        }
+
+        const base64Image = captureImageFromVideo(video);
+        messageEl.textContent = 'Verifying face...';
+        messageEl.style.background = "rgba(76, 201, 240, 0.1)";
+
+        try {
+          const result = await verifyFace(base64Image, name);
+          if (result.success) {
+            messageEl.textContent = `Welcome, ${result.name}! Redirecting...`;
+            messageEl.style.background = "rgba(74, 222, 128, 0.1)";
+            setTimeout(() => window.location.href = '/index', 1000);
+          } else {
+            messageEl.textContent = result.message || 'Face not recognized. Please try again.';
+            messageEl.style.background = "rgba(255, 107, 107, 0.1)";
+          }
+        } catch (error) {
+          messageEl.textContent = 'Error during verification: ' + error.message;
+          messageEl.style.background = "rgba(255, 107, 107, 0.1)";
+          console.error('Verification error:', error);
+        }
+      });
+    });
+
+    async function verifyFace(base64Image, name) {
+      // In a real implementation, this would call your backend API
+      // For demo purposes, we'll simulate a successful verification
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve({
+            success: true,
+            name: name,
+            message: 'Face recognized successfully'
+          });
+        }, 1500);
+      });
+    }
+
+    function captureImageFromVideo(videoElement) {
+      const canvas = document.createElement('canvas');
+      canvas.width = videoElement.videoWidth;
+      canvas.height = videoElement.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+      return canvas.toDataURL('image/jpeg');
+    }
+
+    async function startWebcam() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          video: { 
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            facingMode: 'user' 
+          } 
+        });
+        const video = document.getElementById('video');
+        video.srcObject = stream;
+      } catch (err) {
+        const msg = document.getElementById("face-login-message");
+        msg.textContent = "Camera access error: " + err.message;
+        msg.style.background = "rgba(255, 107, 107, 0.1)";
+        console.error('Camera error:', err);
+      }
+    }
+  </script>
+</body>
+</html>
